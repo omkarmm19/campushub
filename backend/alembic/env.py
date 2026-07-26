@@ -9,8 +9,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 from app.core.config import settings
 from app.db.base import Base
-# Import models here so Alembic detects all tables automatically in the future
-# import app.models
+import app.models  # Ensures all models are registered with Base.metadata
 
 config = context.config
 
@@ -51,8 +50,8 @@ def run_migrations_online() -> None:
             connection=connection, target_metadata=target_metadata
         )
 
-    with context.begin_transaction():
-        context.run_migrations()
+        with context.begin_transaction():
+            context.run_migrations()
 
 
 if context.is_offline_mode():
