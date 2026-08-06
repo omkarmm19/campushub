@@ -10,6 +10,7 @@ import ResetPassword from './pages/auth/ResetPassword';
 import HousingList from './pages/housing/HousingList';
 import HousingDetail from './pages/housing/HousingDetail';
 import HousingCreate from './pages/housing/HousingCreate';
+import HousingEdit from './pages/housing/HousingEdit';
 import ProtectedRoute from './components/common/ProtectedRoute';
 
 export default function App() {
@@ -29,6 +30,7 @@ export default function App() {
               {/* Module routes placeholder - will be added as we build each module */}
               <Route path="/housing" element={<HousingList />} />
               <Route path="/housing/create" element={<ProtectedRoute><HousingCreate /></ProtectedRoute>} />
+              <Route path="/housing/:id/edit" element={<ProtectedRoute><HousingEdit /></ProtectedRoute>} />
               <Route path="/housing/:id" element={<HousingDetail />} />
               <Route path="/marketplace" element={<div className="p-8 text-center text-slate-500">Marketplace Module Coming Soon</div>} />
               <Route path="/lost-found" element={<div className="p-8 text-center text-slate-500">Lost & Found Module Coming Soon</div>} />
