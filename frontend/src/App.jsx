@@ -7,6 +7,7 @@ import Register from './pages/auth/Register';
 import Login from './pages/auth/Login';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import ResetPassword from './pages/auth/ResetPassword';
+import HousingList from './pages/housing/HousingList';
 
 export default function App() {
   return (
@@ -23,7 +24,7 @@ export default function App() {
               <Route path="/reset-password" element={<ResetPassword />} />
 
               {/* Module routes placeholder - will be added as we build each module */}
-              <Route path="/housing" element={<div className="p-8 text-center text-slate-500">Housing Module Coming Soon</div>} />
+              <Route path="/housing" element={<HousingList />} />
               <Route path="/marketplace" element={<div className="p-8 text-center text-slate-500">Marketplace Module Coming Soon</div>} />
               <Route path="/lost-found" element={<div className="p-8 text-center text-slate-500">Lost & Found Module Coming Soon</div>} />
               <Route path="/opportunities" element={<div className="p-8 text-center text-slate-500">Opportunities Module Coming Soon</div>} />
