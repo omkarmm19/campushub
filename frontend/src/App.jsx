@@ -18,6 +18,7 @@ import MarketplaceCreate from './pages/marketplace/MarketplaceCreate';
 import { LostFoundList, LostFoundDetail, LostFoundCreate } from './pages/lostfound/LostFound';
 import { OpportunitiesList, OpportunityDetail, OpportunityCreate } from './pages/opportunities/Opportunities';
 import { EventsList, EventDetail, EventCreate } from './pages/events/Events';
+import Dashboard from './pages/dashboard/Dashboard';
 
 export default function App() {
   return (
@@ -50,7 +51,7 @@ export default function App() {
               <Route path="/events" element={<EventsList />} />
               <Route path="/events/create" element={<ProtectedRoute><EventCreate /></ProtectedRoute>} />
               <Route path="/events/:id" element={<EventDetail />} />
-              <Route path="/dashboard" element={<div className="p-8 text-center text-slate-500">Student Dashboard Coming Soon</div>} />
+              <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
               <Route path="/saved" element={<div className="p-8 text-center text-slate-500">Saved Posts Coming Soon</div>} />
               <Route path="/admin" element={<div className="p-8 text-center text-slate-500">Admin Panel Coming Soon</div>} />
             </Routes>
