@@ -7,6 +7,7 @@ from app.api.v1.marketplace import router as marketplace_router
 from app.api.v1.lostfound import router as lostfound_router
 from app.api.v1.opportunities import router as opportunities_router
 from app.api.v1.events import router as events_router
+from app.api.v1.admin import router as admin_router
 
 app = FastAPI(
     title="CampusHub API",
@@ -31,6 +32,7 @@ app.include_router(marketplace_router, prefix="/api/v1")
 app.include_router(lostfound_router, prefix="/api/v1")
 app.include_router(opportunities_router, prefix="/api/v1")
 app.include_router(events_router, prefix="/api/v1")
+app.include_router(admin_router, prefix="/api/v1")
 
 
 @app.get("/")

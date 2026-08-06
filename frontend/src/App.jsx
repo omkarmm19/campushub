@@ -19,6 +19,7 @@ import { LostFoundList, LostFoundDetail, LostFoundCreate } from './pages/lostfou
 import { OpportunitiesList, OpportunityDetail, OpportunityCreate } from './pages/opportunities/Opportunities';
 import { EventsList, EventDetail, EventCreate } from './pages/events/Events';
 import Dashboard from './pages/dashboard/Dashboard';
+import AdminPanel from './pages/admin/AdminPanel';
 
 export default function App() {
   return (
@@ -53,7 +54,7 @@ export default function App() {
               <Route path="/events/:id" element={<EventDetail />} />
               <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
               <Route path="/saved" element={<div className="p-8 text-center text-slate-500">Saved Posts Coming Soon</div>} />
-              <Route path="/admin" element={<div className="p-8 text-center text-slate-500">Admin Panel Coming Soon</div>} />
+              <Route path="/admin" element={<ProtectedRoute><AdminPanel /></ProtectedRoute>} />
             </Routes>
           </main>
           <Footer />
