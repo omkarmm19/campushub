@@ -12,6 +12,9 @@ import HousingDetail from './pages/housing/HousingDetail';
 import HousingCreate from './pages/housing/HousingCreate';
 import HousingEdit from './pages/housing/HousingEdit';
 import ProtectedRoute from './components/common/ProtectedRoute';
+import MarketplaceList from './pages/marketplace/MarketplaceList';
+import MarketplaceDetail from './pages/marketplace/MarketplaceDetail';
+import MarketplaceCreate from './pages/marketplace/MarketplaceCreate';
 
 export default function App() {
   return (
@@ -32,7 +35,9 @@ export default function App() {
               <Route path="/housing/create" element={<ProtectedRoute><HousingCreate /></ProtectedRoute>} />
               <Route path="/housing/:id/edit" element={<ProtectedRoute><HousingEdit /></ProtectedRoute>} />
               <Route path="/housing/:id" element={<HousingDetail />} />
-              <Route path="/marketplace" element={<div className="p-8 text-center text-slate-500">Marketplace Module Coming Soon</div>} />
+              <Route path="/marketplace" element={<MarketplaceList />} />
+              <Route path="/marketplace/create" element={<ProtectedRoute><MarketplaceCreate /></ProtectedRoute>} />
+              <Route path="/marketplace/:id" element={<MarketplaceDetail />} />
               <Route path="/lost-found" element={<div className="p-8 text-center text-slate-500">Lost & Found Module Coming Soon</div>} />
               <Route path="/opportunities" element={<div className="p-8 text-center text-slate-500">Opportunities Module Coming Soon</div>} />
               <Route path="/events" element={<div className="p-8 text-center text-slate-500">Events Module Coming Soon</div>} />
