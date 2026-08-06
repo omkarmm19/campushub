@@ -8,6 +8,7 @@ import Login from './pages/auth/Login';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import ResetPassword from './pages/auth/ResetPassword';
 import HousingList from './pages/housing/HousingList';
+import HousingDetail from './pages/housing/HousingDetail';
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
 
               {/* Module routes placeholder - will be added as we build each module */}
               <Route path="/housing" element={<HousingList />} />
+              <Route path="/housing/:id" element={<HousingDetail />} />
               <Route path="/marketplace" element={<div className="p-8 text-center text-slate-500">Marketplace Module Coming Soon</div>} />
               <Route path="/lost-found" element={<div className="p-8 text-center text-slate-500">Lost & Found Module Coming Soon</div>} />
               <Route path="/opportunities" element={<div className="p-8 text-center text-slate-500">Opportunities Module Coming Soon</div>} />
