@@ -15,6 +15,9 @@ import ProtectedRoute from './components/common/ProtectedRoute';
 import MarketplaceList from './pages/marketplace/MarketplaceList';
 import MarketplaceDetail from './pages/marketplace/MarketplaceDetail';
 import MarketplaceCreate from './pages/marketplace/MarketplaceCreate';
+import { LostFoundList, LostFoundDetail, LostFoundCreate } from './pages/lostfound/LostFound';
+import { OpportunitiesList, OpportunityDetail, OpportunityCreate } from './pages/opportunities/Opportunities';
+import { EventsList, EventDetail, EventCreate } from './pages/events/Events';
 
 export default function App() {
   return (
@@ -38,9 +41,15 @@ export default function App() {
               <Route path="/marketplace" element={<MarketplaceList />} />
               <Route path="/marketplace/create" element={<ProtectedRoute><MarketplaceCreate /></ProtectedRoute>} />
               <Route path="/marketplace/:id" element={<MarketplaceDetail />} />
-              <Route path="/lost-found" element={<div className="p-8 text-center text-slate-500">Lost & Found Module Coming Soon</div>} />
-              <Route path="/opportunities" element={<div className="p-8 text-center text-slate-500">Opportunities Module Coming Soon</div>} />
-              <Route path="/events" element={<div className="p-8 text-center text-slate-500">Events Module Coming Soon</div>} />
+              <Route path="/lost-found" element={<LostFoundList />} />
+              <Route path="/lost-found/create" element={<ProtectedRoute><LostFoundCreate /></ProtectedRoute>} />
+              <Route path="/lost-found/:id" element={<LostFoundDetail />} />
+              <Route path="/opportunities" element={<OpportunitiesList />} />
+              <Route path="/opportunities/create" element={<ProtectedRoute><OpportunityCreate /></ProtectedRoute>} />
+              <Route path="/opportunities/:id" element={<OpportunityDetail />} />
+              <Route path="/events" element={<EventsList />} />
+              <Route path="/events/create" element={<ProtectedRoute><EventCreate /></ProtectedRoute>} />
+              <Route path="/events/:id" element={<EventDetail />} />
               <Route path="/dashboard" element={<div className="p-8 text-center text-slate-500">Student Dashboard Coming Soon</div>} />
               <Route path="/saved" element={<div className="p-8 text-center text-slate-500">Saved Posts Coming Soon</div>} />
               <Route path="/admin" element={<div className="p-8 text-center text-slate-500">Admin Panel Coming Soon</div>} />
