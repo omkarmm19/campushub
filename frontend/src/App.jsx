@@ -21,6 +21,7 @@ import { OpportunitiesList, OpportunityDetail, OpportunityCreate, OpportunityEdi
 import { EventsList, EventDetail, EventCreate, EventEdit } from './pages/events/Events';
 import Dashboard from './pages/dashboard/Dashboard';
 import AdminPanel from './pages/admin/AdminPanel';
+import SavedPosts from './pages/saved/SavedPosts';
 
 export default function App() {
   return (
@@ -58,7 +59,7 @@ export default function App() {
               <Route path="/events/:id/edit" element={<ProtectedRoute><EventEdit /></ProtectedRoute>} />
               <Route path="/events/:id" element={<EventDetail />} />
               <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-              <Route path="/saved" element={<div className="p-8 text-center text-slate-500">Saved Posts Coming Soon</div>} />
+              <Route path="/saved" element={<ProtectedRoute><SavedPosts /></ProtectedRoute>} />
               <Route path="/admin" element={<ProtectedRoute><AdminPanel /></ProtectedRoute>} />
               <Route path="*" element={
                 <div className="py-20 flex flex-col items-center text-center">
