@@ -1,7 +1,7 @@
 from datetime import date, datetime
 from typing import Optional, List
-from pydantic import BaseModel, ConfigDict
-from app.schemas.user import UserResponse
+from pydantic import BaseModel, ConfigDict, field_validator
+from app.schemas.user import UserResponse, normalize_phone_number
 
 
 class HousingImageSchema(BaseModel):
@@ -28,6 +28,14 @@ class HousingListingCreate(BaseModel):
     pref_study_friendly: Optional[bool] = None
     pref_sleep_schedule: Optional[str] = None
 
+    @field_validator("whatsapp")
+    @classmethod
+    def validate_whatsapp(cls, v: str) -> str:
+        cleaned = normalize_phone_number(v)
+        if not cleaned or len(cleaned) != 10:
+            raise ValueError("WhatsApp number must be a valid 10-digit number.")
+        return cleaned
+
 
 class HousingListingUpdate(BaseModel):
     rent_per_person: Optional[int] = None
@@ -44,6 +52,16 @@ class HousingListingUpdate(BaseModel):
     pref_study_friendly: Optional[bool] = None
     pref_sleep_schedule: Optional[str] = None
     is_active: Optional[bool] = None
+
+    @field_validator("whatsapp")
+    @classmethod
+    def validate_whatsapp(cls, v: Optional[str]) -> Optional[str]:
+        if v is None:
+            return v
+        cleaned = normalize_phone_number(v)
+        if not cleaned or len(cleaned) != 10:
+            raise ValueError("WhatsApp number must be a valid 10-digit number.")
+        return cleaned
 
 
 class HousingListingResponse(BaseModel):

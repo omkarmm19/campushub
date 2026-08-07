@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Optional, List
-from pydantic import BaseModel, ConfigDict
-from app.schemas.user import UserResponse
+from pydantic import BaseModel, ConfigDict, field_validator
+from app.schemas.user import UserResponse, normalize_phone_number
 
 
 class MarketplaceImageSchema(BaseModel):
@@ -21,6 +21,14 @@ class MarketplaceItemCreate(BaseModel):
     listing_type: str = "sell"  # 'sell', 'rent', 'free'
     whatsapp: str
 
+    @field_validator("whatsapp")
+    @classmethod
+    def validate_whatsapp(cls, v: str) -> str:
+        cleaned = normalize_phone_number(v)
+        if not cleaned or len(cleaned) != 10:
+            raise ValueError("WhatsApp number must be a valid 10-digit number.")
+        return cleaned
+
 
 class MarketplaceItemUpdate(BaseModel):
     title: Optional[str] = None
@@ -32,6 +40,16 @@ class MarketplaceItemUpdate(BaseModel):
     whatsapp: Optional[str] = None
     is_sold: Optional[bool] = None
     is_active: Optional[bool] = None
+
+    @field_validator("whatsapp")
+    @classmethod
+    def validate_whatsapp(cls, v: Optional[str]) -> Optional[str]:
+        if v is None:
+            return v
+        cleaned = normalize_phone_number(v)
+        if not cleaned or len(cleaned) != 10:
+            raise ValueError("WhatsApp number must be a valid 10-digit number.")
+        return cleaned
 
 
 class MarketplaceItemResponse(BaseModel):

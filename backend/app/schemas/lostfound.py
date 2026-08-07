@@ -1,7 +1,7 @@
 from datetime import date, datetime
 from typing import Optional, List
-from pydantic import BaseModel, ConfigDict
-from app.schemas.user import UserResponse
+from pydantic import BaseModel, ConfigDict, field_validator
+from app.schemas.user import UserResponse, normalize_phone_number
 
 
 class LostFoundImageSchema(BaseModel):
@@ -19,6 +19,14 @@ class LostFoundPostCreate(BaseModel):
     incident_date: Optional[date] = None
     whatsapp: str
 
+    @field_validator("whatsapp")
+    @classmethod
+    def validate_whatsapp(cls, v: str) -> str:
+        cleaned = normalize_phone_number(v)
+        if not cleaned or len(cleaned) != 10:
+            raise ValueError("WhatsApp number must be a valid 10-digit number.")
+        return cleaned
+
 
 class LostFoundPostUpdate(BaseModel):
     title: Optional[str] = None
@@ -28,6 +36,16 @@ class LostFoundPostUpdate(BaseModel):
     whatsapp: Optional[str] = None
     is_resolved: Optional[bool] = None
     is_active: Optional[bool] = None
+
+    @field_validator("whatsapp")
+    @classmethod
+    def validate_whatsapp(cls, v: Optional[str]) -> Optional[str]:
+        if v is None:
+            return v
+        cleaned = normalize_phone_number(v)
+        if not cleaned or len(cleaned) != 10:
+            raise ValueError("WhatsApp number must be a valid 10-digit number.")
+        return cleaned
 
 
 class LostFoundPostResponse(BaseModel):

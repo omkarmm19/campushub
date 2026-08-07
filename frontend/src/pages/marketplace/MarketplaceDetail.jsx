@@ -7,6 +7,7 @@ import {
 import { marketplaceAPI } from '../../api/marketplaceAPI';
 import { useAuth } from '../../context/AuthContext';
 import SaveButton from '../../components/common/SaveButton';
+import { getWhatsAppUrl } from '../../utils/formatters';
 
 const CONDITION_LABELS = { new: 'Brand New', good: 'Good Condition', fair: 'Fair Condition', poor: 'Needs Work' };
 const CONDITION_COLORS = { new: 'bg-emerald-100 text-emerald-700', good: 'bg-blue-100 text-blue-700', fair: 'bg-amber-100 text-amber-700', poor: 'bg-red-100 text-red-600' };
@@ -200,10 +201,10 @@ export default function MarketplaceDetail() {
             </div>
             {user ? (
               <a
-                href={`https://wa.me/91${item.whatsapp}?text=Hi! I'm interested in your listing "${item.title}" on CampusHub.`}
+                href={getWhatsAppUrl(item.whatsapp, `Hi! I'm interested in your listing "${item.title}" on CampusHub.`)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm rounded-xl shadow-md shadow-emerald-200 transition"
+                className="flex items-center justify-center gap-2 w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm rounded-xl shadow-md shadow-emerald-200 transition"
               >
                 <Phone className="h-4 w-4" /> WhatsApp
               </a>
