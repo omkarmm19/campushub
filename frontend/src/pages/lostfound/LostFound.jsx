@@ -396,3 +396,105 @@ export function LostFoundCreate() {
     </div>
   );
 }
+
+// ─── EDIT PAGE ─────────────────────────────────────────────────────
+export function LostFoundEdit() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const { user } = useAuth();
+  const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
+  const [form, setForm] = useState(null);
+
+  useEffect(() => {
+    lostFoundAPI.getPost(id).then((data) => {
+      if (data.user_id !== user?.id && !user?.is_admin) { navigate('/lost-found', { replace: true }); return; }
+      setForm({
+        post_type: data.post_type ?? 'lost',
+        title: data.title ?? '',
+        description: data.description ?? '',
+        location: data.location ?? '',
+        incident_date: data.incident_date ?? '',
+        whatsapp: data.whatsapp ?? '',
+        is_resolved: data.is_resolved ?? false,
+      });
+    }).catch(() => setError('Failed to load post.')).finally(() => setLoading(false));
+  }, [id, user, navigate]);
+
+  const set = (k, v) => setForm((f) => ({ ...f, [k]: v }));
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!form.title.trim() || !form.description.trim() || !/^\d{10}$/.test(form.whatsapp)) {
+      setError('Please fill all required fields with a valid 10-digit WhatsApp number.'); return;
+    }
+    setSubmitting(true); setError('');
+    try {
+      await lostFoundAPI.updatePost(id, { ...form, incident_date: form.incident_date || null, location: form.location || null });
+      navigate(`/lost-found/${id}`);
+    } catch (err) {
+      setError(err.response?.data?.detail || 'Failed to update.'); setSubmitting(false);
+    }
+  };
+
+  if (loading) return <div className="max-w-xl mx-auto py-16 flex justify-center"><Loader2 className="h-8 w-8 animate-spin text-indigo-400" /></div>;
+  if (!form) return <div className="max-w-xl mx-auto py-20 text-center text-slate-500">{error || 'Unable to load post.'}</div>;
+
+  return (
+    <div className="max-w-xl mx-auto py-8">
+      <div className="mb-6 flex items-center gap-2">
+        <div className="p-1.5 bg-amber-100 text-amber-600 rounded-lg"><Search className="h-4 w-4" /></div>
+        <div><h1 className="text-2xl font-bold text-slate-900">Edit Report</h1><p className="text-sm text-slate-500">Update your lost & found report</p></div>
+      </div>
+      {error && <div className="mb-5 p-4 bg-red-50 border border-red-200 rounded-xl flex items-center gap-3 text-sm text-red-700"><AlertCircle className="h-4 w-4 shrink-0" />{error}</div>}
+      <form onSubmit={handleSubmit} className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 space-y-5">
+        {/* Mark resolved */}
+        <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
+          <p className="text-sm font-semibold text-slate-700">Status</p>
+          <button type="button" onClick={() => set('is_resolved', !form.is_resolved)}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition ${form.is_resolved ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-200 text-slate-500'}`}>
+            {form.is_resolved ? <>✅ Resolved</> : <>🔍 Active</>}
+          </button>
+        </div>
+        <div className="grid grid-cols-2 gap-3">
+          {[['lost', '😔 I Lost Something'], ['found', '✅ I Found Something']].map(([val, label]) => (
+            <button key={val} type="button" onClick={() => set('post_type', val)}
+              className={`p-3 rounded-xl border-2 text-sm font-semibold text-left transition ${form.post_type === val ? 'border-indigo-500 bg-indigo-50 text-indigo-700' : 'border-slate-200 text-slate-600'}`}>
+              {label}
+            </button>
+          ))}
+        </div>
+        <div className="flex flex-col gap-1.5">
+          <label className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Title *</label>
+          <input type="text" value={form.title} onChange={(e) => set('title', e.target.value)} className={inputCls} required maxLength={200} />
+        </div>
+        <div className="flex flex-col gap-1.5">
+          <label className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Description *</label>
+          <textarea rows={4} value={form.description} onChange={(e) => set('description', e.target.value)} className={`${inputCls} resize-none`} required />
+        </div>
+        <div className="grid grid-cols-2 gap-4">
+          <div className="flex flex-col gap-1.5">
+            <label className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Location</label>
+            <div className="relative"><MapPin className="absolute left-3 top-3 h-4 w-4 text-slate-400" /><input type="text" value={form.location} onChange={(e) => set('location', e.target.value)} className={`${inputCls} pl-9`} /></div>
+          </div>
+          <div className="flex flex-col gap-1.5">
+            <label className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Date</label>
+            <div className="relative"><Calendar className="absolute left-3 top-3 h-4 w-4 text-slate-400" /><input type="date" value={form.incident_date} onChange={(e) => set('incident_date', e.target.value)} className={`${inputCls} pl-9`} /></div>
+          </div>
+        </div>
+        <div className="flex flex-col gap-1.5">
+          <label className="text-xs font-semibold text-slate-500 uppercase tracking-wide">WhatsApp *</label>
+          <input type="tel" value={form.whatsapp} onChange={(e) => set('whatsapp', e.target.value)} className={inputCls} maxLength={10} />
+        </div>
+        <div className="flex gap-3 pt-2">
+          <button type="button" onClick={() => navigate(-1)} className="flex-1 py-3 border border-slate-200 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-50 transition">Cancel</button>
+          <button type="submit" disabled={submitting} className="flex-1 flex items-center justify-center gap-2 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm rounded-xl shadow-md shadow-indigo-200 transition disabled:opacity-60">
+            {submitting ? <><Loader2 className="h-4 w-4 animate-spin" /> Saving...</> : <><Check className="h-4 w-4" /> Save Changes</>}
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+}
+

@@ -304,3 +304,75 @@ export function OpportunityCreate() {
     </div>
   );
 }
+
+// ─── EDIT PAGE ─────────────────────────────────────────────────────
+const OPP_TYPES_EDIT = ['internship', 'hackathon', 'workshop', 'competition', 'other'];
+const inputClsEdit = 'w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 placeholder:text-slate-400';
+
+export function OpportunityEdit() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const { user } = useAuth();
+  const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
+  const [form, setForm] = useState(null);
+
+  useEffect(() => {
+    opportunitiesAPI.getOpportunity(id).then((data) => {
+      if (data.user_id !== user?.id && !user?.is_admin) { navigate('/opportunities', { replace: true }); return; }
+      setForm({ title: data.title ?? '', opp_type: data.opp_type ?? 'internship', organization: data.organization ?? '', description: data.description ?? '', deadline: data.deadline ?? '', apply_link: data.apply_link ?? '', is_active: data.is_active ?? true });
+    }).catch(() => setError('Failed to load.')).finally(() => setLoading(false));
+  }, [id, user, navigate]);
+
+  const set = (k, v) => setForm((f) => ({ ...f, [k]: v }));
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!form.title.trim() || !form.description.trim()) { setError('Title and description required.'); return; }
+    setSubmitting(true); setError('');
+    try {
+      await opportunitiesAPI.updateOpportunity(id, { ...form, deadline: form.deadline || null, apply_link: form.apply_link || null, organization: form.organization || null });
+      navigate(`/opportunities/${id}`);
+    } catch (err) { setError(err.response?.data?.detail || 'Failed to update.'); setSubmitting(false); }
+  };
+
+  if (loading) return <div className="max-w-xl mx-auto py-16 flex justify-center"><Loader2 className="h-8 w-8 animate-spin text-indigo-400" /></div>;
+  if (!form) return <div className="max-w-xl mx-auto py-20 text-center text-slate-500">{error}</div>;
+
+  return (
+    <div className="max-w-xl mx-auto py-8">
+      <div className="mb-6 flex items-center gap-2">
+        <div className="p-1.5 bg-purple-100 text-purple-600 rounded-lg"><Briefcase className="h-4 w-4" /></div>
+        <div><h1 className="text-2xl font-bold text-slate-900">Edit Opportunity</h1><p className="text-sm text-slate-500">Update opportunity details</p></div>
+      </div>
+      {error && <div className="mb-5 p-4 bg-red-50 border border-red-200 rounded-xl flex items-center gap-3 text-sm text-red-700"><AlertCircle className="h-4 w-4 shrink-0" />{error}</div>}
+      <form onSubmit={handleSubmit} className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 space-y-5">
+        <div className="flex flex-col gap-1.5">
+          <label className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Type</label>
+          <div className="flex flex-wrap gap-2">
+            {OPP_TYPES_EDIT.map((t) => (
+              <button key={t} type="button" onClick={() => set('opp_type', t)}
+                className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition capitalize ${form.opp_type === t ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white text-slate-600 border-slate-200'}`}>
+                {TYPE_META[t]?.label}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="flex flex-col gap-1.5"><label className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Title *</label><input type="text" value={form.title} onChange={(e) => set('title', e.target.value)} className={inputClsEdit} required /></div>
+        <div className="grid grid-cols-2 gap-4">
+          <div className="flex flex-col gap-1.5"><label className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Organization</label><input type="text" value={form.organization} onChange={(e) => set('organization', e.target.value)} className={inputClsEdit} /></div>
+          <div className="flex flex-col gap-1.5"><label className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Deadline</label><input type="date" value={form.deadline} onChange={(e) => set('deadline', e.target.value)} className={inputClsEdit} /></div>
+        </div>
+        <div className="flex flex-col gap-1.5"><label className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Description *</label><textarea rows={5} value={form.description} onChange={(e) => set('description', e.target.value)} className={`${inputClsEdit} resize-none`} required /></div>
+        <div className="flex flex-col gap-1.5"><label className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Apply Link</label><input type="url" value={form.apply_link} onChange={(e) => set('apply_link', e.target.value)} className={inputClsEdit} /></div>
+        <div className="flex gap-3 pt-2">
+          <button type="button" onClick={() => navigate(-1)} className="flex-1 py-3 border border-slate-200 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-50 transition">Cancel</button>
+          <button type="submit" disabled={submitting} className="flex-1 flex items-center justify-center gap-2 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm rounded-xl shadow-md shadow-indigo-200 transition disabled:opacity-60">
+            {submitting ? <><Loader2 className="h-4 w-4 animate-spin" /> Saving...</> : <><Check className="h-4 w-4" /> Save Changes</>}
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+}
