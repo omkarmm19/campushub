@@ -15,6 +15,7 @@ import ProtectedRoute from './components/common/ProtectedRoute';
 import MarketplaceList from './pages/marketplace/MarketplaceList';
 import MarketplaceDetail from './pages/marketplace/MarketplaceDetail';
 import MarketplaceCreate from './pages/marketplace/MarketplaceCreate';
+import MarketplaceEdit from './pages/marketplace/MarketplaceEdit';
 import { LostFoundList, LostFoundDetail, LostFoundCreate } from './pages/lostfound/LostFound';
 import { OpportunitiesList, OpportunityDetail, OpportunityCreate } from './pages/opportunities/Opportunities';
 import { EventsList, EventDetail, EventCreate } from './pages/events/Events';
@@ -42,6 +43,7 @@ export default function App() {
               <Route path="/housing/:id" element={<HousingDetail />} />
               <Route path="/marketplace" element={<MarketplaceList />} />
               <Route path="/marketplace/create" element={<ProtectedRoute><MarketplaceCreate /></ProtectedRoute>} />
+              <Route path="/marketplace/:id/edit" element={<ProtectedRoute><MarketplaceEdit /></ProtectedRoute>} />
               <Route path="/marketplace/:id" element={<MarketplaceDetail />} />
               <Route path="/lost-found" element={<LostFoundList />} />
               <Route path="/lost-found/create" element={<ProtectedRoute><LostFoundCreate /></ProtectedRoute>} />
