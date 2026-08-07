@@ -129,7 +129,7 @@ function InfoRow({ icon, label, value }) {
 }
 
 import SaveButton from '../../components/common/SaveButton';
-import { getWhatsAppUrl } from '../../utils/formatters';
+import { getWhatsAppUrl, buildHousingWhatsAppMsg } from '../../utils/formatters';
 
 function PrefChip({ label, value }) {
   if (value === null || value === undefined) return null;
@@ -384,7 +384,7 @@ export default function HousingDetail() {
 
             {user ? (
               <a
-                href={getWhatsAppUrl(listing.whatsapp, "Hi! I saw your listing on CampusHub.")}
+                href={getWhatsAppUrl(listing.whatsapp, buildHousingWhatsAppMsg(listing))}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm rounded-xl shadow-md shadow-emerald-200 transition"

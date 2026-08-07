@@ -8,7 +8,7 @@ import {
 import { lostFoundAPI } from '../../api/communityAPI';
 import { useAuth } from '../../context/AuthContext';
 import SaveButton from '../../components/common/SaveButton';
-import { getWhatsAppUrl } from '../../utils/formatters';
+import { getWhatsAppUrl, buildLostFoundWhatsAppMsg } from '../../utils/formatters';
 
 // ─── Shared helpers ────────────────────────────────────────────────
 function SkeletonCard() {
@@ -270,7 +270,7 @@ export function LostFoundDetail() {
               </div>
             </div>
             {user ? (
-              <a href={getWhatsAppUrl(post.whatsapp, 'Hi! I saw your Lost & Found post on CampusHub.')} target="_blank" rel="noopener noreferrer"
+              <a href={getWhatsAppUrl(post.whatsapp, buildLostFoundWhatsAppMsg(post))} target="_blank" rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm rounded-xl shadow-md shadow-emerald-200 transition">
                 <Phone className="h-4 w-4" /> WhatsApp
               </a>
