@@ -12,3 +12,4 @@ python-multipart>=0.0.9
 cloudinary>=1.40.0
 fastapi-mail>=1.4.1
 python-dotenv>=1.0.1
+gunicorn>=22.0.0

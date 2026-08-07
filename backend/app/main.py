@@ -16,10 +16,15 @@ app = FastAPI(
     version="1.0.0",
 )
 
-# CORS — allows the React frontend to talk to this backend
+# CORS — allows the React frontend (local dev & production deployments) to talk to this backend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # Vite dev server
+    allow_origins=[
+        "http://localhost:5173",
+        "http://localhost:3000",
+        "http://127.0.0.1:57173",
+    ],
+    allow_origin_regex=r"https://.*\.vercel\.app|https://.*\.netlify\.app|https://.*\.onrender\.com",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
