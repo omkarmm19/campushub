@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import { lostFoundAPI } from '../../api/communityAPI';
 import { useAuth } from '../../context/AuthContext';
+import SaveButton from '../../components/common/SaveButton';
 
 // ─── Shared helpers ────────────────────────────────────────────────
 function SkeletonCard() {
@@ -217,19 +218,25 @@ export function LostFoundDetail() {
       <div className="max-w-2xl mx-auto py-6 space-y-5">
         <div className="flex items-center justify-between">
           <button onClick={() => navigate(-1)} className="flex items-center gap-1.5 text-sm text-slate-500 hover:text-indigo-600 font-medium transition"><ArrowLeft className="h-4 w-4" /> Back</button>
-          {canManage && (
-            <div className="flex gap-2">
-              {!post.is_resolved && (
-                <button onClick={markResolved} disabled={markingResolved}
-                  className="flex items-center gap-1.5 px-4 py-2 border border-emerald-200 text-sm font-semibold text-emerald-600 rounded-xl hover:bg-emerald-50 transition disabled:opacity-50">
-                  <CheckCircle2 className="h-4 w-4" /> {markingResolved ? 'Marking...' : 'Mark Resolved'}
+          <div className="flex items-center gap-2">
+            <SaveButton module="lostfound" postId={id} />
+            {canManage && (
+              <>
+                {!post.is_resolved && (
+                  <button onClick={markResolved} disabled={markingResolved}
+                    className="flex items-center gap-1.5 px-4 py-2 border border-emerald-200 text-sm font-semibold text-emerald-600 rounded-xl hover:bg-emerald-50 transition disabled:opacity-50">
+                    <CheckCircle2 className="h-4 w-4" /> {markingResolved ? 'Marking...' : 'Mark Resolved'}
+                  </button>
+                )}
+                <Link to={`/lost-found/${id}/edit`} className="flex items-center gap-1.5 px-4 py-2 border border-slate-200 text-sm font-semibold text-slate-700 rounded-xl hover:bg-slate-50 transition">
+                  <Edit className="h-4 w-4" /> Edit
+                </Link>
+                <button onClick={() => setShowDelete(true)} className="flex items-center gap-1.5 px-4 py-2 border border-red-200 text-sm font-semibold text-red-600 rounded-xl hover:bg-red-50 transition">
+                  <Trash2 className="h-4 w-4" /> Delete
                 </button>
-              )}
-              <button onClick={() => setShowDelete(true)} className="flex items-center gap-1.5 px-4 py-2 border border-red-200 text-sm font-semibold text-red-600 rounded-xl hover:bg-red-50 transition">
-                <Trash2 className="h-4 w-4" /> Delete
-              </button>
-            </div>
-          )}
+              </>
+            )}
+          </div>
         </div>
 
         <ImageCarousel images={post.images} />

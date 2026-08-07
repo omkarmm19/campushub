@@ -128,6 +128,8 @@ function InfoRow({ icon, label, value }) {
   );
 }
 
+import SaveButton from '../../components/common/SaveButton';
+
 function PrefChip({ label, value }) {
   if (value === null || value === undefined) return null;
   const positive = value === true;
@@ -240,22 +242,25 @@ export default function HousingDetail() {
             <ArrowLeft className="h-4 w-4" /> Back
           </button>
 
-          {canManage && (
-            <div className="flex items-center gap-2">
-              <Link
-                to={`/housing/${id}/edit`}
-                className="flex items-center gap-1.5 px-4 py-2 border border-slate-200 text-sm font-semibold text-slate-700 rounded-xl hover:bg-slate-50 transition"
-              >
-                <Edit className="h-4 w-4" /> Edit
-              </Link>
-              <button
-                onClick={() => setShowDeleteModal(true)}
-                className="flex items-center gap-1.5 px-4 py-2 border border-red-200 text-sm font-semibold text-red-600 rounded-xl hover:bg-red-50 transition"
-              >
-                <Trash2 className="h-4 w-4" /> Delete
-              </button>
-            </div>
-          )}
+          <div className="flex items-center gap-2">
+            <SaveButton module="housing" postId={id} />
+            {canManage && (
+              <>
+                <Link
+                  to={`/housing/${id}/edit`}
+                  className="flex items-center gap-1.5 px-4 py-2 border border-slate-200 text-sm font-semibold text-slate-700 rounded-xl hover:bg-slate-50 transition"
+                >
+                  <Edit className="h-4 w-4" /> Edit
+                </Link>
+                <button
+                  onClick={() => setShowDeleteModal(true)}
+                  className="flex items-center gap-1.5 px-4 py-2 border border-red-200 text-sm font-semibold text-red-600 rounded-xl hover:bg-red-50 transition"
+                >
+                  <Trash2 className="h-4 w-4" /> Delete
+                </button>
+              </>
+            )}
+          </div>
         </div>
 
         {/* Image Carousel */}

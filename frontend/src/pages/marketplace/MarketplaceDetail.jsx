@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import { marketplaceAPI } from '../../api/marketplaceAPI';
 import { useAuth } from '../../context/AuthContext';
+import SaveButton from '../../components/common/SaveButton';
 
 const CONDITION_LABELS = { new: 'Brand New', good: 'Good Condition', fair: 'Fair Condition', poor: 'Needs Work' };
 const CONDITION_COLORS = { new: 'bg-emerald-100 text-emerald-700', good: 'bg-blue-100 text-blue-700', fair: 'bg-amber-100 text-amber-700', poor: 'bg-red-100 text-red-600' };
@@ -131,16 +132,19 @@ export default function MarketplaceDetail() {
           <button onClick={() => navigate(-1)} className="flex items-center gap-1.5 text-sm text-slate-500 hover:text-indigo-600 font-medium transition">
             <ArrowLeft className="h-4 w-4" /> Back
           </button>
-          {canManage && (
-            <div className="flex gap-2">
-              <Link to={`/marketplace/${id}/edit`} className="flex items-center gap-1.5 px-4 py-2 border border-slate-200 text-sm font-semibold text-slate-700 rounded-xl hover:bg-slate-50 transition">
-                <Edit className="h-4 w-4" /> Edit
-              </Link>
-              <button onClick={() => setShowDelete(true)} className="flex items-center gap-1.5 px-4 py-2 border border-red-200 text-sm font-semibold text-red-600 rounded-xl hover:bg-red-50 transition">
-                <Trash2 className="h-4 w-4" /> Delete
-              </button>
-            </div>
-          )}
+          <div className="flex items-center gap-2">
+            <SaveButton module="marketplace" postId={id} />
+            {canManage && (
+              <>
+                <Link to={`/marketplace/${id}/edit`} className="flex items-center gap-1.5 px-4 py-2 border border-slate-200 text-sm font-semibold text-slate-700 rounded-xl hover:bg-slate-50 transition">
+                  <Edit className="h-4 w-4" /> Edit
+                </Link>
+                <button onClick={() => setShowDelete(true)} className="flex items-center gap-1.5 px-4 py-2 border border-red-200 text-sm font-semibold text-red-600 rounded-xl hover:bg-red-50 transition">
+                  <Trash2 className="h-4 w-4" /> Delete
+                </button>
+              </>
+            )}
+          </div>
         </div>
 
         <ImageCarousel images={item.images} />

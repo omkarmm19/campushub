@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import { eventsAPI } from '../../api/communityAPI';
 import { useAuth } from '../../context/AuthContext';
+import SaveButton from '../../components/common/SaveButton';
 
 const TYPE_META = {
   technical: { label: '💻 Technical', color: 'bg-blue-100 text-blue-700' },
@@ -179,12 +180,15 @@ export function EventDetail() {
       <div className="max-w-2xl mx-auto py-6 space-y-5">
         <div className="flex items-center justify-between">
           <button onClick={() => navigate(-1)} className="flex items-center gap-1.5 text-sm text-slate-500 hover:text-indigo-600 font-medium transition"><ArrowLeft className="h-4 w-4" /> Back</button>
-          {canManage && (
-            <div className="flex gap-2">
-              <Link to={`/events/${id}/edit`} className="flex items-center gap-1.5 px-4 py-2 border border-slate-200 text-sm font-semibold text-slate-700 rounded-xl hover:bg-slate-50 transition"><Edit className="h-4 w-4" /> Edit</Link>
-              <button onClick={() => setShowDelete(true)} className="flex items-center gap-1.5 px-4 py-2 border border-red-200 text-sm font-semibold text-red-600 rounded-xl hover:bg-red-50 transition"><Trash2 className="h-4 w-4" /> Delete</button>
-            </div>
-          )}
+          <div className="flex items-center gap-2">
+            <SaveButton module="events" postId={id} />
+            {canManage && (
+              <>
+                <Link to={`/events/${id}/edit`} className="flex items-center gap-1.5 px-4 py-2 border border-slate-200 text-sm font-semibold text-slate-700 rounded-xl hover:bg-slate-50 transition"><Edit className="h-4 w-4" /> Edit</Link>
+                <button onClick={() => setShowDelete(true)} className="flex items-center gap-1.5 px-4 py-2 border border-red-200 text-sm font-semibold text-red-600 rounded-xl hover:bg-red-50 transition"><Trash2 className="h-4 w-4" /> Delete</button>
+              </>
+            )}
+          </div>
         </div>
 
         {event.poster_url && <img src={event.poster_url} alt="Event poster" className="w-full rounded-2xl object-cover max-h-80 shadow-lg" />}

@@ -89,6 +89,17 @@ export default function Navbar() {
                     </Link>
                   )}
                   <Link
+                    to="/profile"
+                    title="Profile Settings"
+                    className={`p-2 rounded-lg transition ${
+                      isActive('/profile')
+                        ? 'text-indigo-600 bg-indigo-50'
+                        : 'text-slate-500 hover:text-indigo-600 hover:bg-slate-100'
+                    }`}
+                  >
+                    <User className="h-5 w-5" />
+                  </Link>
+                  <Link
                     to="/dashboard"
                     className={`flex items-center gap-2 pl-2 pr-3 py-1.5 rounded-lg text-sm font-medium transition ${
                       isActive('/dashboard')
@@ -96,7 +107,6 @@ export default function Navbar() {
                         : 'bg-slate-100 hover:bg-slate-200 text-slate-800'
                     }`}
                   >
-                    <User className="h-4 w-4 text-indigo-600" />
                     <span>{user.name.split(' ')[0]}</span>
                   </Link>
                   <button
@@ -163,6 +173,11 @@ export default function Navbar() {
                     <User className="h-5 w-5" />
                     Dashboard
                     <span className="ml-auto text-xs text-slate-400 font-normal">{user.name.split(' ')[0]}</span>
+                  </Link>
+                  <Link to="/profile" onClick={() => setMenuOpen(false)}
+                    className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition">
+                    <User className="h-5 w-5" />
+                    Profile Settings
                   </Link>
                   <Link to="/saved" onClick={() => setMenuOpen(false)}
                     className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition">
