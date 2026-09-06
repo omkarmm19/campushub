@@ -3,10 +3,12 @@ from sqlalchemy.orm import sessionmaker
 from app.core.config import settings
 
 # psycopg3 requires 'postgresql+psycopg://' prefix
-# This auto-fixes the URL if user provides plain 'postgresql://'
-db_url = settings.DATABASE_URL.replace(
-    "postgresql://", "postgresql+psycopg://", 1
-)
+# Handle standard URLs from cloud providers like Render, Heroku, Neon, Supabase
+db_url = settings.DATABASE_URL
+if db_url.startswith("postgres://"):
+    db_url = db_url.replace("postgres://", "postgresql+psycopg://", 1)
+elif db_url.startswith("postgresql://"):
+    db_url = db_url.replace("postgresql://", "postgresql+psycopg://", 1)
 
 # pool_pre_ping=True → pings DB before each query
 # Important for Neon serverless — wakes the DB if it auto-suspended

@@ -10,14 +10,14 @@ import { useAuth } from '../../context/AuthContext';
 const AMENITY_OPTIONS = ['WiFi', 'Electricity', 'Water', 'Parking', 'Mess', 'AC', 'Laundry', 'Security'];
 const SHARING_OPTIONS = ['single', 'double', 'triple', 'other'];
 
-const inputCls = 'w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 placeholder:text-slate-400';
+const inputCls = 'w-full px-3 py-2 bg-[#17171A] border border-[#26262B] rounded-md text-xs text-[#F2F2F3] focus:outline-none focus:border-[#F5A623] placeholder:text-[#71717A] font-mono';
 
 function Field({ label, children, hint }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label className="text-xs font-semibold text-slate-600 uppercase tracking-wide">{label}</label>
+      <label className="text-[11px] font-mono uppercase tracking-wider text-[#8B8B92]">{label}</label>
       {children}
-      {hint && <p className="text-xs text-slate-400">{hint}</p>}
+      {hint && <p className="text-[11px] font-mono text-[#71717A]">{hint}</p>}
     </div>
   );
 }
@@ -36,7 +36,6 @@ export default function HousingEdit() {
     const load = async () => {
       try {
         const data = await housingAPI.getListing(id);
-        // Authorization check
         if (data.user_id !== user?.id && !user?.is_admin) {
           navigate('/housing', { replace: true });
           return;
@@ -107,74 +106,74 @@ export default function HousingEdit() {
   if (loading) {
     return (
       <div className="max-w-2xl mx-auto py-16 flex justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-indigo-400" />
+        <Loader2 className="h-6 w-6 animate-spin text-[#F5A623]" />
       </div>
     );
   }
 
   if (!form) {
     return (
-      <div className="max-w-2xl mx-auto py-20 text-center text-slate-500">
+      <div className="max-w-2xl mx-auto py-20 text-center text-[#8B8B92]">
         {error || 'Unable to load listing.'}
       </div>
     );
   }
 
   return (
-    <div className="max-w-2xl mx-auto py-8">
+    <div className="max-w-2xl mx-auto py-4 space-y-6">
       {/* Header */}
-      <div className="mb-6 flex items-center gap-2">
-        <div className="p-1.5 bg-indigo-100 text-indigo-600 rounded-lg">
-          <Edit3 className="h-4 w-4" />
+      <div className="border-b border-[#26262B] pb-4">
+        <div className="flex items-center gap-2 mb-1">
+          <Edit3 className="h-5 w-5 text-[#F2F2F3]" />
+          <h1 className="text-xl sm:text-2xl font-semibold text-[#F2F2F3] tracking-tight">
+            Edit Listing
+          </h1>
         </div>
-        <div>
-          <h1 className="text-2xl font-bold text-slate-900">Edit Listing</h1>
-          <p className="text-sm text-slate-500">Update your housing listing details</p>
-        </div>
+        <p className="text-xs text-[#8B8B92]">Update your housing listing information</p>
       </div>
 
       {error && (
-        <div className="mb-5 p-4 bg-red-50 border border-red-200 rounded-xl flex items-center gap-3 text-sm text-red-700">
+        <div className="p-3 bg-[#111113] border border-red-500/30 rounded-md flex items-center gap-2.5 text-xs text-red-400 font-mono">
           <AlertCircle className="h-4 w-4 shrink-0" /> {error}
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 space-y-5">
+      <form onSubmit={handleSubmit} className="bg-[#111113] rounded-md border border-[#26262B] p-5 space-y-5">
 
         {/* Active toggle */}
-        <div className="flex items-center justify-between p-4 bg-slate-50 rounded-xl border border-slate-200">
+        <div className="flex items-center justify-between p-3 bg-[#17171A] rounded-md border border-[#26262B]">
           <div>
-            <p className="text-sm font-semibold text-slate-700">Listing Status</p>
-            <p className="text-xs text-slate-400 mt-0.5">
-              {form.is_active ? 'Visible to everyone' : 'Hidden from listings'}
+            <p className="text-xs font-semibold text-[#F2F2F3]">Listing Status</p>
+            <p className="text-[11px] font-mono text-[#71717A] mt-0.5">
+              {form.is_active ? 'Visible to everyone' : 'Hidden from listings feed'}
             </p>
           </div>
           <button
             type="button"
             onClick={() => set('is_active', !form.is_active)}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition ${
+            className={`flex items-center gap-1.5 px-3 py-1 rounded-sm text-xs font-mono font-medium transition ${
               form.is_active
-                ? 'bg-emerald-100 text-emerald-700'
-                : 'bg-slate-200 text-slate-500'
+                ? 'border border-[#34D399]/30 bg-[#34D399]/10 text-[#34D399]'
+                : 'border border-[#26262B] bg-[#111113] text-[#71717A]'
             }`}
           >
             {form.is_active
-              ? <><ToggleRight className="h-5 w-5" /> Active</>
-              : <><ToggleLeft className="h-5 w-5" /> Inactive</>}
+              ? <><ToggleRight className="h-4 w-4" /> Active</>
+              : <><ToggleLeft className="h-4 w-4" /> Inactive</>}
           </button>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
-          <Field label="Rent per Person (₹/month)">
+        <div className="grid grid-cols-2 gap-3">
+          <Field label="Rent per Person (₹/mo)">
             <div className="relative">
-              <IndianRupee className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-              <input type="number" value={form.rent_per_person} onChange={(e) => set('rent_per_person', e.target.value)} className={`${inputCls} pl-9`} required />
+              <IndianRupee className="absolute left-3 top-2.5 h-3.5 w-3.5 text-[#71717A]" />
+              <input type="number" value={form.rent_per_person} onChange={(e) => set('rent_per_person', e.target.value)} className={`${inputCls} pl-8`} required />
             </div>
           </Field>
           <Field label="Security Deposit (₹)">
             <div className="relative">
-              <IndianRupee className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-              <input type="number" value={form.security_deposit} onChange={(e) => set('security_deposit', e.target.value)} className={`${inputCls} pl-9`} />
+              <IndianRupee className="absolute left-3 top-2.5 h-3.5 w-3.5 text-[#71717A]" />
+              <input type="number" value={form.security_deposit} onChange={(e) => set('security_deposit', e.target.value)} className={`${inputCls} pl-8`} />
             </div>
           </Field>
         </div>
@@ -186,10 +185,10 @@ export default function HousingEdit() {
                 key={s}
                 type="button"
                 onClick={() => set('sharing_type', s)}
-                className={`flex-1 py-2 rounded-xl border-2 text-xs font-semibold capitalize transition ${
+                className={`flex-1 py-1.5 rounded-sm border text-xs font-mono capitalize transition ${
                   form.sharing_type === s
-                    ? 'border-indigo-500 bg-indigo-50 text-indigo-700'
-                    : 'border-slate-200 text-slate-500 hover:border-slate-300'
+                    ? 'border-[#F5A623] bg-[#F5A623]/10 text-[#F5A623]'
+                    : 'border-[#26262B] bg-[#17171A] text-[#8B8B92] hover:border-[#3A3A42]'
                 }`}
               >
                 {s}
@@ -198,77 +197,80 @@ export default function HousingEdit() {
           </div>
         </Field>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-3">
           <Field label="Location / Area">
             <div className="relative">
-              <MapPin className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-              <input type="text" value={form.location} onChange={(e) => set('location', e.target.value)} className={`${inputCls} pl-9`} placeholder="e.g. Kothrud" />
+              <MapPin className="absolute left-3 top-2.5 h-3.5 w-3.5 text-[#71717A]" />
+              <input type="text" value={form.location} onChange={(e) => set('location', e.target.value)} className={`${inputCls} pl-8`} placeholder="e.g. Near Gate 3" />
             </div>
           </Field>
-          <Field label="Distance from College (km)">
+          <Field label="Distance (km)">
             <input type="number" step="0.5" value={form.distance_km} onChange={(e) => set('distance_km', e.target.value)} className={inputCls} placeholder="e.g. 2" />
           </Field>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-3">
           <Field label="Available From">
             <div className="relative">
-              <Calendar className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-              <input type="date" value={form.available_from} onChange={(e) => set('available_from', e.target.value)} className={`${inputCls} pl-9`} required />
+              <Calendar className="absolute left-3 top-2.5 h-3.5 w-3.5 text-[#71717A]" />
+              <input type="date" value={form.available_from} onChange={(e) => set('available_from', e.target.value)} className={`${inputCls} pl-8`} required />
             </div>
           </Field>
-          <Field label="WhatsApp Number" hint="10-digit, no +91">
+          <Field label="WhatsApp Number" hint="10-digit without +91">
             <div className="relative">
-              <Phone className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-              <input type="tel" value={form.whatsapp} onChange={(e) => set('whatsapp', e.target.value)} className={`${inputCls} pl-9`} maxLength={10} required />
+              <Phone className="absolute left-3 top-2.5 h-3.5 w-3.5 text-[#71717A]" />
+              <input type="tel" value={form.whatsapp} onChange={(e) => set('whatsapp', e.target.value)} className={`${inputCls} pl-8`} maxLength={10} required />
             </div>
           </Field>
         </div>
 
         <Field label="Amenities">
-          <div className="flex flex-wrap gap-2">
-            {AMENITY_OPTIONS.map((a) => (
-              <button
-                key={a}
-                type="button"
-                onClick={() => toggleAmenity(a)}
-                className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition ${
-                  form.amenities.includes(a)
-                    ? 'bg-indigo-600 text-white border-indigo-600'
-                    : 'bg-white text-slate-600 border-slate-200 hover:border-indigo-300'
-                }`}
-              >
-                {form.amenities.includes(a) && <span className="mr-1">✓</span>}
-                {a}
-              </button>
-            ))}
+          <div className="flex flex-wrap gap-1.5">
+            {AMENITY_OPTIONS.map((a) => {
+              const active = form.amenities.includes(a);
+              return (
+                <button
+                  key={a}
+                  type="button"
+                  onClick={() => toggleAmenity(a)}
+                  className={`px-2.5 py-1 rounded-sm text-xs font-mono border transition ${
+                    active
+                      ? 'border-[#F5A623]/30 bg-[#F5A623]/10 text-[#F5A623]'
+                      : 'border-[#26262B] bg-[#17171A] text-[#8B8B92] hover:text-[#F2F2F3]'
+                  }`}
+                >
+                  {active && <span className="mr-1 text-[#F5A623]">✓</span>}
+                  {a}
+                </button>
+              );
+            })}
           </div>
         </Field>
 
         <Field label="Description">
           <div className="relative">
-            <FileText className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-            <textarea rows={4} value={form.description} onChange={(e) => set('description', e.target.value)} className={`${inputCls} pl-9 resize-none`} required />
+            <FileText className="absolute left-3 top-2.5 h-3.5 w-3.5 text-[#71717A]" />
+            <textarea rows={4} value={form.description} onChange={(e) => set('description', e.target.value)} className={`${inputCls} pl-8 resize-none`} required />
           </div>
         </Field>
 
         {/* Preferences */}
-        <div className="space-y-3">
-          <h3 className="font-semibold text-slate-700 text-sm">Roommate Preferences</h3>
-          <div className="grid grid-cols-3 gap-3">
+        <div className="space-y-2">
+          <h3 className="text-xs font-mono uppercase tracking-wider text-[#8B8B92]">Roommate Preferences</h3>
+          <div className="grid grid-cols-3 gap-2">
             {[
-              { key: 'pref_veg', label: '🥗 Vegetarian' },
-              { key: 'pref_smoking', label: '🚬 Non-smoking' },
-              { key: 'pref_study_friendly', label: '📚 Study-friendly' },
+              { key: 'pref_veg', label: 'Vegetarian' },
+              { key: 'pref_smoking', label: 'Non-smoking' },
+              { key: 'pref_study_friendly', label: 'Study-friendly' },
             ].map(({ key, label }) => (
               <button
                 key={key}
                 type="button"
                 onClick={() => set(key, form[key] === true ? null : true)}
-                className={`p-3 rounded-xl border-2 text-left text-xs font-medium transition ${
+                className={`p-2.5 rounded-sm border text-left text-xs font-mono transition ${
                   form[key] === true
-                    ? 'border-indigo-500 bg-indigo-50 text-indigo-700'
-                    : 'border-slate-200 text-slate-500 hover:border-slate-300'
+                    ? 'border-[#34D399]/30 bg-[#34D399]/10 text-[#34D399]'
+                    : 'border-[#26262B] bg-[#17171A] text-[#8B8B92] hover:border-[#3A3A42]'
                 }`}
               >
                 {label}
@@ -277,22 +279,22 @@ export default function HousingEdit() {
           </div>
         </div>
 
-        <div className="flex gap-3 pt-2">
+        <div className="flex gap-2 pt-3">
           <button
             type="button"
             onClick={() => navigate(-1)}
-            className="flex-1 py-3 border border-slate-200 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-50 transition"
+            className="flex-1 py-2 border border-[#26262B] rounded-md text-xs font-medium text-[#8B8B92] hover:text-[#F2F2F3] hover:bg-[#17171A] transition"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={submitting}
-            className="flex-1 flex items-center justify-center gap-2 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm rounded-xl shadow-md shadow-indigo-200 transition disabled:opacity-60"
+            className="flex-1 flex items-center justify-center gap-2 py-2 bg-[#F5A623] hover:bg-[#E0921B] text-[#0A0A0B] font-semibold text-xs rounded-md transition disabled:opacity-60"
           >
             {submitting
-              ? <><Loader2 className="h-4 w-4 animate-spin" /> Saving...</>
-              : <><Check className="h-4 w-4" /> Save Changes</>}
+              ? <><Loader2 className="h-3.5 w-3.5 animate-spin" /> Saving...</>
+              : <><Check className="h-3.5 w-3.5" /> Save Changes</>}
           </button>
         </div>
       </form>

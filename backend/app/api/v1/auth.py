@@ -20,6 +20,7 @@ from app.core.security import (
     decode_token,
 )
 from app.core.email import generate_otp, send_otp_email
+from app.core.config import settings
 
 router = APIRouter(prefix="/auth", tags=["Auth"])
 
@@ -84,12 +85,14 @@ def login(credentials: LoginRequest, response: Response, db: Session = Depends(g
     refresh_token = create_refresh_token(subject=user.id)
 
     # Also set httpOnly cookie for refresh token security
+    is_prod = settings.ENVIRONMENT.lower() == "production"
     response.set_cookie(
         key="refresh_token",
         value=refresh_token,
         httponly=True,
         max_age=7 * 24 * 3600,
-        samesite="lax",
+        samesite="none" if is_prod else "lax",
+        secure=True if is_prod else False,
     )
 
     return TokenResponse(
@@ -208,5 +211,10 @@ def logout(response: Response):
     """
     Logout student and clear refresh token cookie.
     """
-    response.delete_cookie(key="refresh_token")
+    is_prod = settings.ENVIRONMENT.lower() == "production"
+    response.delete_cookie(
+        key="refresh_token",
+        samesite="none" if is_prod else "lax",
+        secure=True if is_prod else False,
+    )
     return {"message": "Logged out successfully."}

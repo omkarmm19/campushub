@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ShoppingBag, IndianRupee, Tag, Upload, X, Check, AlertCircle, Loader2, ChevronRight, ChevronLeft } from 'lucide-react';
+import { ShoppingBag, IndianRupee, Upload, X, Check, AlertCircle, Loader2, ChevronRight, ChevronLeft } from 'lucide-react';
 import { marketplaceAPI } from '../../api/marketplaceAPI';
 import { useAuth } from '../../context/AuthContext';
 
@@ -14,27 +14,35 @@ const CONDITIONS = [
   { value: 'poor', label: 'Poor', desc: 'Heavy wear / needs repair' },
 ];
 const LISTING_TYPES = [
-  { value: 'sell', label: '💰 Sell', desc: 'One-time payment' },
-  { value: 'rent', label: '🔑 Rent', desc: 'Per month basis' },
-  { value: 'free', label: '🎁 Give Away', desc: 'No charge' },
+  { value: 'sell', label: 'Sell', desc: 'One-time payment' },
+  { value: 'rent', label: 'Rent', desc: 'Monthly basis' },
+  { value: 'free', label: 'Give Away', desc: 'Zero cost' },
 ];
 
-const inputCls = 'w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 placeholder:text-slate-400';
+const inputCls = 'w-full px-3 py-2 bg-[#17171A] border border-[#26262B] rounded-md text-xs text-[#F2F2F3] focus:outline-none focus:border-[#F5A623] placeholder:text-[#71717A] font-mono';
 
 function StepBar({ current }) {
   return (
-    <div className="flex items-center gap-0 mb-8">
+    <div className="flex items-center gap-2 mb-6">
       {STEPS.map((step, i) => (
-        <div key={step} className="flex items-center">
-          <div className={`flex items-center justify-center h-8 w-8 rounded-full text-xs font-bold transition-all ${
-            i < current ? 'bg-indigo-600 text-white' : i === current ? 'bg-indigo-600 text-white ring-4 ring-indigo-100' : 'bg-slate-100 text-slate-400'
+        <div key={step} className="flex items-center gap-2">
+          <div className={`flex items-center justify-center h-6 w-6 rounded-sm text-xs font-mono font-medium transition ${
+            i < current
+              ? 'bg-[#34D399]/15 text-[#34D399] border border-[#34D399]/30'
+              : i === current
+              ? 'bg-[#F5A623] text-[#0A0A0B] font-semibold'
+              : 'bg-[#17171A] border border-[#26262B] text-[#71717A]'
           }`}>
-            {i < current ? <Check className="h-4 w-4" /> : i + 1}
+            {i < current ? <Check className="h-3 w-3" /> : i + 1}
           </div>
-          <span className={`hidden sm:block ml-2 text-xs font-semibold ${i === current ? 'text-indigo-600' : i < current ? 'text-slate-600' : 'text-slate-400'}`}>
+          <span className={`hidden sm:block text-xs font-mono ${
+            i === current ? 'text-[#F2F2F3] font-medium' : 'text-[#71717A]'
+          }`}>
             {step}
           </span>
-          {i < STEPS.length - 1 && <div className={`h-0.5 w-10 sm:w-16 mx-2 transition-all ${i < current ? 'bg-indigo-600' : 'bg-slate-200'}`} />}
+          {i < STEPS.length - 1 && (
+            <div className={`h-px w-6 sm:w-10 ${i < current ? 'bg-[#34D399]/40' : 'bg-[#26262B]'}`} />
+          )}
         </div>
       ))}
     </div>
@@ -108,37 +116,47 @@ export default function MarketplaceCreate() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto py-8">
-      <div className="mb-6">
+    <div className="max-w-2xl mx-auto py-4 space-y-6">
+      <div className="border-b border-[#26262B] pb-4">
         <div className="flex items-center gap-2 mb-1">
-          <div className="p-1.5 bg-emerald-100 text-emerald-600 rounded-lg"><ShoppingBag className="h-4 w-4" /></div>
-          <h1 className="text-2xl font-bold text-slate-900">Post an Item</h1>
+          <ShoppingBag className="h-5 w-5 text-[#F2F2F3]" />
+          <h1 className="text-xl sm:text-2xl font-semibold text-[#F2F2F3] tracking-tight">Post an Item</h1>
         </div>
-        <p className="text-sm text-slate-500 ml-9">List something to sell, rent, or give away</p>
+        <p className="text-xs text-[#8B8B92]">List something to sell, rent, or give away on campus</p>
       </div>
 
       <StepBar current={step} />
 
       {error && (
-        <div className="mb-5 p-4 bg-red-50 border border-red-200 rounded-xl flex items-center gap-3 text-sm text-red-700">
+        <div className="p-3 bg-[#111113] border border-red-500/30 rounded-md flex items-center gap-2.5 text-xs text-red-400 font-mono">
           <AlertCircle className="h-4 w-4 shrink-0" /> {error}
         </div>
       )}
 
-      <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 space-y-5">
+      <div className="bg-[#111113] rounded-md border border-[#26262B] p-5 space-y-5">
 
         {/* Step 0: Item Info */}
         {step === 0 && (
           <>
             {/* Listing Type */}
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Listing Type <span className="text-red-400">*</span></label>
-              <div className="grid grid-cols-3 gap-3">
+              <label className="text-[11px] font-mono text-[#8B8B92] uppercase">
+                Listing Type <span className="text-[#F5A623]">*</span>
+              </label>
+              <div className="grid grid-cols-3 gap-2.5">
                 {LISTING_TYPES.map((t) => (
-                  <button key={t.value} type="button" onClick={() => set('listing_type', t.value)}
-                    className={`p-3 rounded-xl border-2 text-left transition ${form.listing_type === t.value ? 'border-indigo-500 bg-indigo-50' : 'border-slate-200 hover:border-slate-300'}`}>
-                    <p className="font-semibold text-slate-800 text-sm">{t.label}</p>
-                    <p className="text-xs text-slate-400 mt-0.5">{t.desc}</p>
+                  <button
+                    key={t.value}
+                    type="button"
+                    onClick={() => set('listing_type', t.value)}
+                    className={`p-3 rounded-md border text-left transition ${
+                      form.listing_type === t.value
+                        ? 'border-[#F5A623] bg-[#F5A623]/10 text-[#F5A623]'
+                        : 'border-[#26262B] bg-[#17171A] hover:border-[#3A3A42] text-[#8B8B92]'
+                    }`}
+                  >
+                    <p className="font-semibold text-xs text-[#F2F2F3]">{t.label}</p>
+                    <p className="text-[10px] font-mono text-[#71717A] mt-0.5">{t.desc}</p>
                   </button>
                 ))}
               </div>
@@ -146,59 +164,115 @@ export default function MarketplaceCreate() {
 
             {/* Title */}
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Title <span className="text-red-400">*</span></label>
-              <input type="text" placeholder="e.g. Engineering Mathematics by RD Sharma" value={form.title} onChange={(e) => set('title', e.target.value)} className={inputCls} maxLength={200} />
+              <label className="text-[11px] font-mono text-[#8B8B92] uppercase">
+                Title <span className="text-[#F5A623]">*</span>
+              </label>
+              <input
+                type="text"
+                placeholder="e.g. Engineering Mathematics by RD Sharma"
+                value={form.title}
+                onChange={(e) => set('title', e.target.value)}
+                className={inputCls}
+                maxLength={200}
+              />
             </div>
 
             {/* Category */}
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Category <span className="text-red-400">*</span></label>
-              <div className="flex flex-wrap gap-2">
-                {CATEGORIES.map((c) => (
-                  <button key={c} type="button" onClick={() => set('category', c)}
-                    className={`px-3 py-1.5 rounded-full text-xs font-semibold border capitalize transition ${form.category === c ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white text-slate-600 border-slate-200 hover:border-indigo-300'}`}>
-                    {c}
-                  </button>
-                ))}
+              <label className="text-[11px] font-mono text-[#8B8B92] uppercase">
+                Category <span className="text-[#F5A623]">*</span>
+              </label>
+              <div className="flex flex-wrap gap-1.5">
+                {CATEGORIES.map((c) => {
+                  const active = form.category === c;
+                  return (
+                    <button
+                      key={c}
+                      type="button"
+                      onClick={() => set('category', c)}
+                      className={`px-2.5 py-1 rounded-sm text-xs font-mono capitalize border transition ${
+                        active
+                          ? 'border-[#F5A623]/30 bg-[#F5A623]/10 text-[#F5A623]'
+                          : 'border-[#26262B] bg-[#17171A] text-[#8B8B92] hover:text-[#F2F2F3]'
+                      }`}
+                    >
+                      {c}
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
             {/* Condition */}
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Condition <span className="text-red-400">*</span></label>
+              <label className="text-[11px] font-mono text-[#8B8B92] uppercase">
+                Condition <span className="text-[#F5A623]">*</span>
+              </label>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                 {CONDITIONS.map((c) => (
-                  <button key={c.value} type="button" onClick={() => set('condition', c.value)}
-                    className={`p-3 rounded-xl border-2 text-left transition ${form.condition === c.value ? 'border-indigo-500 bg-indigo-50' : 'border-slate-200 hover:border-slate-300'}`}>
-                    <p className="font-semibold text-slate-800 text-xs">{c.label}</p>
-                    <p className="text-xs text-slate-400">{c.desc}</p>
+                  <button
+                    key={c.value}
+                    type="button"
+                    onClick={() => set('condition', c.value)}
+                    className={`p-2.5 rounded-md border text-left transition ${
+                      form.condition === c.value
+                        ? 'border-[#F5A623] bg-[#F5A623]/10 text-[#F5A623]'
+                        : 'border-[#26262B] bg-[#17171A] hover:border-[#3A3A42] text-[#8B8B92]'
+                    }`}
+                  >
+                    <p className="font-medium text-xs text-[#F2F2F3]">{c.label}</p>
+                    <p className="text-[10px] font-mono text-[#71717A]">{c.desc}</p>
                   </button>
                 ))}
               </div>
             </div>
 
             {/* Price + WhatsApp */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-3">
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-semibold text-slate-500 uppercase tracking-wide">
-                  Price (₹) {form.listing_type !== 'free' && <span className="text-red-400">*</span>}
+                <label className="text-[11px] font-mono text-[#8B8B92] uppercase">
+                  Price (₹) {form.listing_type !== 'free' && <span className="text-[#F5A623]">*</span>}
                 </label>
                 <div className="relative">
-                  <IndianRupee className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-                  <input type="number" placeholder="e.g. 250" value={form.price} onChange={(e) => set('price', e.target.value)} disabled={form.listing_type === 'free'} className={`${inputCls} pl-9 disabled:opacity-50`} />
+                  <IndianRupee className="absolute left-3 top-2.5 h-3.5 w-3.5 text-[#71717A]" />
+                  <input
+                    type="number"
+                    placeholder="e.g. 250"
+                    value={form.price}
+                    onChange={(e) => set('price', e.target.value)}
+                    disabled={form.listing_type === 'free'}
+                    className={`${inputCls} pl-8 disabled:opacity-50`}
+                  />
                 </div>
-                {form.listing_type === 'free' && <p className="text-xs text-emerald-600 font-medium">Listed as free 🎁</p>}
+                {form.listing_type === 'free' && <p className="text-[11px] font-mono text-[#34D399]">Listed as Free</p>}
               </div>
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-semibold text-slate-500 uppercase tracking-wide">WhatsApp <span className="text-red-400">*</span></label>
-                <input type="tel" placeholder="10-digit number" value={form.whatsapp} onChange={(e) => set('whatsapp', e.target.value)} className={inputCls} maxLength={10} />
+                <label className="text-[11px] font-mono text-[#8B8B92] uppercase">
+                  WhatsApp Number <span className="text-[#F5A623]">*</span>
+                </label>
+                <input
+                  type="tel"
+                  placeholder="10-digit number"
+                  value={form.whatsapp}
+                  onChange={(e) => set('whatsapp', e.target.value)}
+                  className={inputCls}
+                  maxLength={10}
+                />
               </div>
             </div>
 
             {/* Description */}
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Description <span className="text-red-400">*</span></label>
-              <textarea rows={4} placeholder="Describe the item, its condition, why you're selling, etc." value={form.description} onChange={(e) => set('description', e.target.value)} className={`${inputCls} resize-none`} />
+              <label className="text-[11px] font-mono text-[#8B8B92] uppercase">
+                Description <span className="text-[#F5A623]">*</span>
+              </label>
+              <textarea
+                rows={4}
+                placeholder="Describe the item, condition, pickup location on campus..."
+                value={form.description}
+                onChange={(e) => set('description', e.target.value)}
+                className={`${inputCls} resize-none`}
+              />
             </div>
           </>
         )}
@@ -206,38 +280,50 @@ export default function MarketplaceCreate() {
         {/* Step 1: Images */}
         {step === 1 && (
           <div className="space-y-4">
-            <p className="text-sm text-slate-500">Upload up to <strong>5 photos</strong> of the item.</p>
-            <button type="button" onClick={() => fileInputRef.current?.click()} disabled={imageFiles.length >= 5}
-              className="w-full border-2 border-dashed border-slate-300 hover:border-indigo-400 rounded-2xl p-8 flex flex-col items-center gap-3 text-slate-400 hover:text-indigo-500 transition disabled:opacity-40">
-              <Upload className="h-8 w-8" />
-              <div className="text-center">
-                <p className="font-semibold text-sm">Click to upload photos</p>
-                <p className="text-xs mt-0.5">JPG, PNG, WEBP · Max 5 images</p>
+            <p className="text-xs text-[#8B8B92]">Upload up to 5 photos of the item.</p>
+            <button
+              type="button"
+              onClick={() => fileInputRef.current?.click()}
+              disabled={imageFiles.length >= 5}
+              className="w-full border border-dashed border-[#26262B] hover:border-[#3A3A42] bg-[#17171A] rounded-md p-6 flex flex-col items-center gap-2 text-[#71717A] hover:text-[#F2F2F3] transition disabled:opacity-40"
+            >
+              <Upload className="h-6 w-6 text-[#8B8B92]" />
+              <div className="text-center font-mono">
+                <p className="text-xs font-medium text-[#F2F2F3]">Click to select item photos</p>
+                <p className="text-[11px] text-[#71717A] mt-0.5">JPG, PNG, WEBP · Up to 5 photos</p>
               </div>
             </button>
             <input ref={fileInputRef} type="file" accept="image/*" multiple className="hidden" onChange={(e) => handleImages(e.target.files)} />
+
             {imagePreviews.length > 0 && (
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-3 gap-2">
                 {imagePreviews.map((src, i) => (
-                  <div key={i} className="relative group rounded-xl overflow-hidden aspect-square bg-slate-100">
+                  <div key={i} className="relative rounded-sm overflow-hidden aspect-square border border-[#26262B] bg-[#0E0E10]">
                     <img src={src} alt="" className="w-full h-full object-cover" />
-                    <button type="button" onClick={() => removeImage(i)} className="absolute top-1.5 right-1.5 p-1 bg-black/60 rounded-full text-white opacity-0 group-hover:opacity-100 transition">
+                    <button
+                      type="button"
+                      onClick={() => removeImage(i)}
+                      className="absolute top-1 right-1 p-1 bg-[#0A0A0B]/80 text-[#F2F2F3] hover:text-red-400 rounded-sm transition"
+                    >
                       <X className="h-3 w-3" />
                     </button>
-                    {i === 0 && <span className="absolute bottom-1.5 left-1.5 px-2 py-0.5 bg-indigo-600 text-white text-xs rounded-full">Cover</span>}
+                    {i === 0 && (
+                      <span className="absolute bottom-1 left-1 px-1.5 py-0.2 bg-[#0A0A0B]/80 border border-[#26262B] text-[#F5A623] text-[10px] font-mono rounded-sm">
+                        Cover
+                      </span>
+                    )}
                   </div>
                 ))}
               </div>
             )}
-            <p className="text-xs text-slate-400 text-center">{imageFiles.length}/5 · You can skip and add photos later</p>
           </div>
         )}
 
         {/* Step 2: Review */}
         {step === 2 && (
-          <div className="space-y-4">
-            <h2 className="font-bold text-slate-800">Review your listing</h2>
-            <div className="grid grid-cols-2 gap-3 text-sm">
+          <div className="space-y-4 text-xs">
+            <h2 className="text-xs font-mono uppercase tracking-wider text-[#F2F2F3]">Review Listing Details</h2>
+            <div className="grid grid-cols-2 gap-2">
               {[
                 ['Type', LISTING_TYPES.find(t => t.value === form.listing_type)?.label],
                 ['Category', form.category],
@@ -245,43 +331,51 @@ export default function MarketplaceCreate() {
                 ['Price', form.listing_type === 'free' ? 'Free' : `₹${parseInt(form.price || 0).toLocaleString('en-IN')}`],
                 ['WhatsApp', form.whatsapp],
               ].map(([k, v]) => (
-                <div key={k} className="bg-slate-50 rounded-xl p-3">
-                  <p className="text-xs text-slate-400 font-medium">{k}</p>
-                  <p className="text-slate-800 font-semibold capitalize">{v}</p>
+                <div key={k} className="bg-[#17171A] border border-[#26262B] rounded-sm p-2.5">
+                  <p className="text-[10px] font-mono text-[#71717A] uppercase">{k}</p>
+                  <p className="text-xs font-medium text-[#F2F2F3] capitalize mt-0.5">{v}</p>
                 </div>
               ))}
             </div>
-            <div className="bg-slate-50 rounded-xl p-3">
-              <p className="text-xs text-slate-400 mb-1 font-medium">Title</p>
-              <p className="font-semibold text-slate-800">{form.title}</p>
+            <div className="bg-[#17171A] border border-[#26262B] rounded-sm p-2.5">
+              <p className="text-[10px] font-mono text-[#71717A] uppercase mb-1">Title</p>
+              <p className="font-semibold text-xs text-[#F2F2F3]">{form.title}</p>
             </div>
-            <div className="bg-slate-50 rounded-xl p-3">
-              <p className="text-xs text-slate-400 mb-1 font-medium">Description</p>
-              <p className="text-slate-600 text-sm line-clamp-3">{form.description}</p>
-            </div>
-            <div className="bg-slate-50 rounded-xl p-3">
-              <p className="text-xs text-slate-400 font-medium">Photos</p>
-              <p className="text-slate-700 font-semibold">{imageFiles.length} photo(s)</p>
+            <div className="bg-[#17171A] border border-[#26262B] rounded-sm p-2.5">
+              <p className="text-[10px] font-mono text-[#71717A] uppercase mb-1">Description</p>
+              <p className="text-xs text-[#8B8B92] line-clamp-3">{form.description}</p>
             </div>
           </div>
         )}
       </div>
 
       {/* Nav */}
-      <div className="flex justify-between mt-6">
-        <button type="button" onClick={() => setStep((s) => s - 1)} disabled={step === 0}
-          className="flex items-center gap-2 px-5 py-2.5 border border-slate-200 text-sm font-semibold text-slate-700 rounded-xl hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition">
-          <ChevronLeft className="h-4 w-4" /> Back
+      <div className="flex justify-between pt-2">
+        <button
+          type="button"
+          onClick={() => setStep((s) => s - 1)}
+          disabled={step === 0}
+          className="flex items-center gap-1.5 px-3.5 py-2 border border-[#26262B] bg-[#111113] hover:bg-[#17171A] text-xs font-medium text-[#8B8B92] hover:text-[#F2F2F3] rounded-md disabled:opacity-40 disabled:cursor-not-allowed transition"
+        >
+          <ChevronLeft className="h-3.5 w-3.5" /> Back
         </button>
         {step < STEPS.length - 1 ? (
-          <button type="button" onClick={() => { if (validate()) setStep((s) => s + 1); }}
-            className="flex items-center gap-2 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm rounded-xl shadow-md shadow-indigo-200 transition">
-            Next <ChevronRight className="h-4 w-4" />
+          <button
+            type="button"
+            onClick={() => { if (validate()) setStep((s) => s + 1); }}
+            className="flex items-center gap-1.5 px-4 py-2 bg-[#F5A623] hover:bg-[#E0921B] text-[#0A0A0B] text-xs font-semibold rounded-md transition"
+          >
+            <span>Next</span>
+            <ChevronRight className="h-3.5 w-3.5" />
           </button>
         ) : (
-          <button type="button" onClick={handleSubmit} disabled={submitting}
-            className="flex items-center gap-2 px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm rounded-xl shadow-md shadow-emerald-200 transition disabled:opacity-60">
-            {submitting ? <><Loader2 className="h-4 w-4 animate-spin" /> Publishing...</> : <><Check className="h-4 w-4" /> Publish Item</>}
+          <button
+            type="button"
+            onClick={handleSubmit}
+            disabled={submitting}
+            className="flex items-center gap-1.5 px-4 py-2 bg-[#F5A623] hover:bg-[#E0921B] text-[#0A0A0B] text-xs font-semibold rounded-md transition disabled:opacity-60"
+          >
+            {submitting ? <><Loader2 className="h-3.5 w-3.5 animate-spin" /> Publishing...</> : <><Check className="h-3.5 w-3.5" /> Publish Item</>}
           </button>
         )}
       </div>

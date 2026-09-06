@@ -46,17 +46,17 @@ export default function SaveButton({ module, postId, className = '' }) {
     <button
       onClick={toggleSave}
       disabled={loading}
-      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-semibold transition ${
+      className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm border text-xs font-mono transition duration-150 ${
         saved
-          ? 'bg-amber-50 border-amber-200 text-amber-700 hover:bg-amber-100'
-          : 'bg-white border-slate-200 text-slate-600 hover:border-indigo-300 hover:text-indigo-600'
+          ? 'bg-[#F5A623]/10 border-[#F5A623]/30 text-[#F5A623]'
+          : 'bg-[#17171A] border-[#26262B] text-[#8B8B92] hover:text-[#F2F2F3] hover:border-[#3A3A42]'
       } ${className}`}
       title={saved ? 'Remove bookmark' : 'Bookmark this post'}
     >
       {loading ? (
-        <Loader2 className="h-3.5 w-3.5 animate-spin" />
+        <Loader2 className="h-3 w-3 animate-spin" />
       ) : (
-        <Bookmark className={`h-3.5 w-3.5 ${saved ? 'fill-amber-500 text-amber-500' : ''}`} />
+        <Bookmark className={`h-3 w-3 ${saved ? 'fill-[#F5A623] text-[#F5A623]' : ''}`} />
       )}
       <span>{saved ? 'Saved' : 'Save'}</span>
     </button>

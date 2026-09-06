@@ -28,7 +28,7 @@ export default function App() {
   return (
     <Router>
       <AuthProvider>
-        <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900">
+        <div className="min-h-screen flex flex-col bg-[#0A0A0B] text-[#F2F2F3]">
           <Navbar />
           <main className="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <Routes>
@@ -65,10 +65,10 @@ export default function App() {
               <Route path="/admin" element={<ProtectedRoute><AdminPanel /></ProtectedRoute>} />
               <Route path="*" element={
                 <div className="py-20 flex flex-col items-center text-center">
-                  <div className="text-7xl font-black text-slate-200 mb-4">404</div>
-                  <h2 className="text-2xl font-bold text-slate-800 mb-2">Page not found</h2>
-                  <p className="text-slate-500 mb-6 text-sm">The page you're looking for doesn't exist.</p>
-                  <a href="/" className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm rounded-xl shadow-md shadow-indigo-200 transition">← Go Home</a>
+                  <div className="text-7xl font-mono font-medium text-[#26262B] mb-4">404</div>
+                  <h2 className="text-xl font-semibold text-[#F2F2F3] mb-2 tracking-tight">Page not found</h2>
+                  <p className="text-[#8B8B92] mb-6 text-sm">The page you're looking for doesn't exist.</p>
+                  <a href="/" className="px-4 py-2 bg-[#F5A623] hover:bg-[#E0921B] text-[#0A0A0B] font-medium text-sm rounded-md transition">← Go Home</a>
                 </div>
               } />
             </Routes>

@@ -16,14 +16,28 @@ app = FastAPI(
     version="1.0.0",
 )
 
+from app.core.config import settings
+
 # CORS — allows the React frontend (local dev & production deployments) to talk to this backend
+origins = [
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "http://localhost:3000",
+    "http://localhost:4173",
+    "http://127.0.0.1:5173",
+    "http://127.0.0.1:5174",
+    "http://127.0.0.1:3000",
+    "http://127.0.0.1:4173",
+]
+if settings.ALLOWED_ORIGINS:
+    for custom_origin in settings.ALLOWED_ORIGINS.split(","):
+        cleaned = custom_origin.strip()
+        if cleaned and cleaned not in origins:
+            origins.append(cleaned)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://localhost:3000",
-        "http://127.0.0.1:57173",
-    ],
+    allow_origins=origins,
     allow_origin_regex=r"https://.*\.vercel\.app|https://.*\.netlify\.app|https://.*\.onrender\.com",
     allow_credentials=True,
     allow_methods=["*"],

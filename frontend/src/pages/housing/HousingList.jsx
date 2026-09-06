@@ -1,27 +1,23 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { Home, Plus, RefreshCw } from 'lucide-react';
+import { Home, Plus, RefreshCw, Shield } from 'lucide-react';
 import { housingAPI } from '../../api/housingAPI';
 import { useAuth } from '../../context/AuthContext';
 import HousingCard from '../../components/housing/HousingCard';
 import HousingFilters from '../../components/housing/HousingFilters';
 
-// Skeleton card for loading state
+// Precision skeleton card
 function SkeletonCard() {
   return (
-    <div className="flex flex-col bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden animate-pulse">
-      <div className="h-44 bg-slate-200" />
-      <div className="p-4 space-y-3">
-        <div className="h-6 bg-slate-200 rounded-lg w-2/5" />
-        <div className="h-4 bg-slate-100 rounded-lg w-3/4" />
-        <div className="h-4 bg-slate-100 rounded-lg w-1/2" />
-        <div className="flex gap-2">
-          <div className="h-5 w-14 bg-slate-100 rounded-full" />
-          <div className="h-5 w-14 bg-slate-100 rounded-full" />
-        </div>
-        <div className="pt-3 border-t border-slate-100 flex gap-2 items-center">
-          <div className="h-6 w-6 bg-slate-200 rounded-full" />
-          <div className="h-4 w-24 bg-slate-100 rounded-lg" />
+    <div className="flex flex-col bg-[#111113] rounded-md border border-[#26262B] p-3 space-y-3 animate-pulse">
+      <div className="h-44 bg-[#17171A] rounded-sm" />
+      <div className="space-y-2 pt-1">
+        <div className="h-5 bg-[#17171A] rounded-sm w-1/3" />
+        <div className="h-3.5 bg-[#17171A] rounded-sm w-3/4" />
+        <div className="h-3.5 bg-[#17171A] rounded-sm w-1/2" />
+        <div className="flex gap-1.5 pt-1">
+          <div className="h-4 w-12 bg-[#17171A] rounded-sm" />
+          <div className="h-4 w-12 bg-[#17171A] rounded-sm" />
         </div>
       </div>
     </div>
@@ -46,7 +42,6 @@ export default function HousingList() {
     setLoading(true);
     setError('');
     try {
-      // Strip empty string values
       const cleanFilters = Object.fromEntries(
         Object.entries(activeFilters).filter(([, v]) => v !== '' && v !== null && v !== undefined)
       );
@@ -59,7 +54,6 @@ export default function HousingList() {
     }
   }, []);
 
-  // Debounce filter changes
   useEffect(() => {
     const timer = setTimeout(() => {
       fetchListings(filters);
@@ -68,28 +62,28 @@ export default function HousingList() {
   }, [filters, fetchListings]);
 
   return (
-    <div className="space-y-6 py-4">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div className="space-y-6 py-2">
+      {/* Header — BUG 1 fix: high contrast, solid icon */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#26262B] pb-4">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <div className="p-1.5 bg-blue-100 text-blue-600 rounded-lg">
-              <Home className="h-4 w-4" />
-            </div>
-            <h1 className="text-2xl font-bold text-slate-900">Housing</h1>
+            <Home className="h-5 w-5 text-[#F2F2F3]" />
+            <h1 className="text-xl sm:text-2xl font-semibold text-[#F2F2F3] tracking-tight">
+              Housing
+            </h1>
           </div>
-          <p className="text-sm text-slate-500">
-            Find rooms &amp; roommates near your college
+          <p className="text-xs text-[#8B8B92]">
+            Verified off-campus flats, rooms, and roommate matching
           </p>
         </div>
 
         {user && (
           <Link
             to="/housing/create"
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm rounded-xl shadow-md shadow-indigo-200 transition"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#F5A623] hover:bg-[#E0921B] text-[#0A0A0B] font-semibold text-xs rounded-md transition duration-150 shrink-0"
           >
-            <Plus className="h-4 w-4" />
-            Post a Listing
+            <Plus className="h-3.5 w-3.5" />
+            <span>Post a Listing</span>
           </Link>
         )}
       </div>
@@ -103,20 +97,20 @@ export default function HousingList() {
 
       {/* Error state */}
       {error && (
-        <div className="p-5 bg-red-50 border border-red-200 rounded-2xl text-center">
-          <p className="text-sm text-red-600 font-medium mb-3">{error}</p>
+        <div className="p-4 bg-[#111113] border border-red-500/30 rounded-md text-center">
+          <p className="text-xs text-red-400 font-medium mb-3">{error}</p>
           <button
             onClick={() => fetchListings(filters)}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold rounded-xl transition"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-[#26262B] bg-[#17171A] hover:bg-[#1E1E22] text-[#F2F2F3] text-xs font-medium rounded-md transition"
           >
-            <RefreshCw className="h-4 w-4" /> Retry
+            <RefreshCw className="h-3.5 w-3.5" /> Retry
           </button>
         </div>
       )}
 
       {/* Loading skeletons */}
       {loading && !error && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {Array.from({ length: 6 }).map((_, i) => (
             <SkeletonCard key={i} />
           ))}
@@ -125,7 +119,7 @@ export default function HousingList() {
 
       {/* Listings grid */}
       {!loading && !error && listings.length > 0 && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {listings.map((listing) => (
             <HousingCard key={listing.id} listing={listing} />
           ))}
@@ -134,37 +128,40 @@ export default function HousingList() {
 
       {/* Empty state */}
       {!loading && !error && listings.length === 0 && (
-        <div className="py-20 flex flex-col items-center text-center text-slate-400">
-          <div className="h-16 w-16 rounded-2xl bg-slate-100 flex items-center justify-center mb-4">
-            <Home className="h-8 w-8 text-slate-300" />
+        <div className="py-16 flex flex-col items-center text-center text-[#8B8B92] border border-[#26262B] bg-[#111113] rounded-md p-8">
+          <div className="h-10 w-10 rounded-sm bg-[#17171A] border border-[#26262B] flex items-center justify-center mb-3">
+            <Home className="h-5 w-5 text-[#80808A]" />
           </div>
-          <h3 className="text-lg font-semibold text-slate-600 mb-1">No listings found</h3>
-          <p className="text-sm max-w-xs">
-            Try adjusting your filters or check back later. New listings are posted regularly!
+          <h3 className="text-sm font-semibold text-[#F2F2F3] mb-1">No listings found</h3>
+          <p className="text-xs text-[#80808A] max-w-xs leading-relaxed">
+            Adjust your rent or distance filters, or be the first student to list a room.
           </p>
           {user && (
             <Link
               to="/housing/create"
-              className="mt-6 inline-flex items-center gap-2 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm rounded-xl shadow-md shadow-indigo-200 transition"
+              className="mt-4 inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-[#F5A623] hover:bg-[#E0921B] text-[#0A0A0B] text-xs font-semibold rounded-md transition"
             >
-              <Plus className="h-4 w-4" />
-              Be the first to post
+              <Plus className="h-3.5 w-3.5" />
+              Post a Listing
             </Link>
           )}
         </div>
       )}
 
-      {/* Guest banner */}
+      {/* Guest notice banner — BUG 2 fix: dark banner with hairline secondary button */}
       {!user && !loading && listings.length > 0 && (
-        <div className="p-4 bg-amber-50 border border-amber-200 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-sm text-amber-800 font-medium">
-            🔒 Log in to view WhatsApp contact details and post your own listings.
-          </p>
+        <div className="p-3.5 bg-[#17171A] border border-[#F5A623]/30 rounded-md flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="flex items-center gap-2.5">
+            <Shield className="h-4 w-4 text-[#F5A623] shrink-0" />
+            <p className="text-xs text-[#8B8B92]">
+              Log in with your college email to view WhatsApp contact numbers and post rooms.
+            </p>
+          </div>
           <Link
             to="/login"
-            className="shrink-0 px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white font-semibold rounded-xl text-xs transition"
+            className="shrink-0 px-3 py-1.5 border border-[#26262B] bg-[#111113] hover:bg-[#1E1E22] hover:border-[#38383F] text-[#F2F2F3] text-xs font-medium rounded-md transition"
           >
-            Log In
+            Log In →
           </Link>
         </div>
       )}

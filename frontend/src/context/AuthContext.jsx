@@ -34,6 +34,9 @@ export const AuthProvider = ({ children }) => {
   const login = async (credentials) => {
     const data = await authAPI.login(credentials);
     localStorage.setItem('access_token', data.access_token);
+    if (data.refresh_token) {
+      localStorage.setItem('refresh_token', data.refresh_token);
+    }
     localStorage.setItem('user', JSON.stringify(data.user));
     setUser(data.user);
     return data;
@@ -47,10 +50,11 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     try {
       await authAPI.logout();
-    } catch (e) {
+    } catch {
       console.warn('Logout endpoint failed, clearing local state');
     }
     localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
     localStorage.removeItem('user');
     setUser(null);
   };

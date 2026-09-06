@@ -1,8 +1,9 @@
 from typing import List, Optional
+from datetime import datetime
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from app.db.session import get_db
 from app.models.saved import SavedPost
 from app.dependencies import get_current_user
@@ -22,10 +23,9 @@ class SavedPostOut(BaseModel):
     id: int
     module: str
     post_id: int
-    created_at: str
+    created_at: datetime
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 @router.get("", response_model=List[SavedPostOut])

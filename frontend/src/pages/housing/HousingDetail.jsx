@@ -7,30 +7,32 @@ import {
 } from 'lucide-react';
 import { housingAPI } from '../../api/housingAPI';
 import { useAuth } from '../../context/AuthContext';
+import SaveButton from '../../components/common/SaveButton';
+import { getWhatsAppUrl, buildHousingWhatsAppMsg } from '../../utils/formatters';
 
 const AMENITY_ICONS = {
-  wifi: <Wifi className="h-4 w-4" />,
-  electricity: <Zap className="h-4 w-4" />,
-  water: <Droplets className="h-4 w-4" />,
-  parking: <Car className="h-4 w-4" />,
-  mess: <Utensils className="h-4 w-4" />,
-  ac: <Wind className="h-4 w-4" />,
+  wifi: <Wifi className="h-3.5 w-3.5" />,
+  electricity: <Zap className="h-3.5 w-3.5" />,
+  water: <Droplets className="h-3.5 w-3.5" />,
+  parking: <Car className="h-3.5 w-3.5" />,
+  mess: <Utensils className="h-3.5 w-3.5" />,
+  ac: <Wind className="h-3.5 w-3.5" />,
 };
 
 const SHARING_LABELS = { single: 'Single', double: 'Double', triple: 'Triple', other: 'Other' };
 
-// Image carousel
+// Image carousel with framed dark container
 function ImageCarousel({ images }) {
   const [current, setCurrent] = useState(0);
 
   if (!images || images.length === 0) {
     return (
-      <div className="h-72 md:h-96 rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200 flex flex-col items-center justify-center text-slate-300">
-        <svg className="h-16 w-16 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <div className="h-72 md:h-84 rounded-md border border-[#26262B] bg-[#111113] flex flex-col items-center justify-center text-[#52525A]">
+        <svg className="h-12 w-12 mb-2 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
             d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
         </svg>
-        <p className="text-sm">No photos uploaded</p>
+        <p className="text-xs font-mono">No photos uploaded</p>
       </div>
     );
   }
@@ -38,34 +40,34 @@ function ImageCarousel({ images }) {
   const sorted = [...images].sort((a, b) => a.display_order - b.display_order);
 
   return (
-    <div className="relative rounded-2xl overflow-hidden bg-black shadow-lg">
+    <div className="relative rounded-md border border-[#26262B] bg-[#0E0E10] overflow-hidden">
       <img
         src={sorted[current].image_url}
         alt={`Photo ${current + 1}`}
-        className="w-full h-72 md:h-96 object-cover"
+        className="w-full h-72 md:h-84 object-contain bg-[#0A0A0B]"
       />
 
       {sorted.length > 1 && (
         <>
           <button
             onClick={() => setCurrent((c) => (c === 0 ? sorted.length - 1 : c - 1))}
-            className="absolute left-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/40 text-white hover:bg-black/60 transition backdrop-blur-sm"
+            className="absolute left-3 top-1/2 -translate-y-1/2 p-1.5 rounded-sm bg-[#0A0A0B]/80 border border-[#26262B] text-[#F2F2F3] hover:border-[#3A3A42] transition"
           >
-            <ChevronLeft className="h-5 w-5" />
+            <ChevronLeft className="h-4 w-4" />
           </button>
           <button
             onClick={() => setCurrent((c) => (c === sorted.length - 1 ? 0 : c + 1))}
-            className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/40 text-white hover:bg-black/60 transition backdrop-blur-sm"
+            className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 rounded-sm bg-[#0A0A0B]/80 border border-[#26262B] text-[#F2F2F3] hover:border-[#3A3A42] transition"
           >
-            <ChevronRight className="h-5 w-5" />
+            <ChevronRight className="h-4 w-4" />
           </button>
           <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
             {sorted.map((_, i) => (
               <button
                 key={i}
                 onClick={() => setCurrent(i)}
-                className={`h-1.5 rounded-full transition-all ${
-                  i === current ? 'w-5 bg-white' : 'w-1.5 bg-white/50'
+                className={`h-1 rounded-sm transition-all ${
+                  i === current ? 'w-5 bg-[#F5A623]' : 'w-2 bg-[#80808A]'
                 }`}
               />
             ))}
@@ -73,7 +75,7 @@ function ImageCarousel({ images }) {
         </>
       )}
 
-      <div className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-black/50 text-white text-xs backdrop-blur-sm">
+      <div className="absolute top-3 right-3 px-2 py-0.5 rounded-sm bg-[#0A0A0B]/80 border border-[#26262B] text-[#8B8B92] text-[10px] font-mono">
         {current + 1} / {sorted.length}
       </div>
     </div>
@@ -83,31 +85,31 @@ function ImageCarousel({ images }) {
 // Delete confirmation modal
 function DeleteModal({ onConfirm, onCancel, loading }) {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-      <div className="bg-white rounded-2xl shadow-xl p-6 max-w-sm w-full">
-        <div className="flex flex-col items-center text-center gap-4">
-          <div className="p-3 bg-red-100 rounded-full">
-            <AlertTriangle className="h-7 w-7 text-red-600" />
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+      <div className="bg-[#111113] border border-[#26262B] rounded-md p-6 max-w-sm w-full space-y-4">
+        <div className="flex flex-col items-center text-center gap-3">
+          <div className="p-2.5 bg-red-500/10 border border-red-500/30 rounded-full">
+            <AlertTriangle className="h-6 w-6 text-red-400" />
           </div>
           <div>
-            <h3 className="font-bold text-slate-900 text-lg">Delete Listing?</h3>
-            <p className="text-sm text-slate-500 mt-1">
-              This will permanently remove your listing. This action cannot be undone.
+            <h3 className="font-semibold text-[#F2F2F3] text-base">Delete Listing?</h3>
+            <p className="text-xs text-[#8B8B92] mt-1">
+              This will permanently remove your listing from the platform.
             </p>
           </div>
-          <div className="flex gap-3 w-full">
+          <div className="flex gap-2 w-full pt-2">
             <button
               onClick={onCancel}
-              className="flex-1 py-2.5 border border-slate-200 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-50 transition"
+              className="flex-1 py-1.5 border border-[#26262B] rounded-md text-xs font-medium text-[#8B8B92] hover:text-[#F2F2F3] hover:bg-[#17171A] transition"
             >
               Cancel
             </button>
             <button
               onClick={onConfirm}
               disabled={loading}
-              className="flex-1 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-xl text-sm font-semibold transition disabled:opacity-50"
+              className="flex-1 py-1.5 bg-red-500 hover:bg-red-600 text-white rounded-md text-xs font-semibold transition disabled:opacity-50"
             >
-              {loading ? 'Deleting...' : 'Yes, Delete'}
+              {loading ? 'Deleting...' : 'Delete'}
             </button>
           </div>
         </div>
@@ -118,31 +120,28 @@ function DeleteModal({ onConfirm, onCancel, loading }) {
 
 function InfoRow({ icon, label, value }) {
   return (
-    <div className="flex items-start gap-3">
-      <div className="p-2 bg-slate-100 rounded-lg text-slate-500 shrink-0">{icon}</div>
+    <div className="flex items-start gap-2.5 p-3 rounded-md bg-[#111113] border border-[#26262B]">
+      <div className="p-1.5 bg-[#17171A] border border-[#26262B] rounded-sm text-[#8B8B92] shrink-0">{icon}</div>
       <div>
-        <p className="text-xs text-slate-400 font-medium">{label}</p>
-        <p className="text-sm text-slate-800 font-semibold">{value}</p>
+        <p className="text-[10px] font-mono uppercase tracking-wider text-[#80808A]">{label}</p>
+        <p className="text-xs font-medium text-[#F2F2F3] mt-0.5">{value}</p>
       </div>
     </div>
   );
 }
 
-import SaveButton from '../../components/common/SaveButton';
-import { getWhatsAppUrl, buildHousingWhatsAppMsg } from '../../utils/formatters';
-
 function PrefChip({ label, value }) {
   if (value === null || value === undefined) return null;
   const positive = value === true;
   return (
-    <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border ${
+    <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-sm text-xs font-mono border ${
       positive
-        ? 'bg-emerald-50 border-emerald-200 text-emerald-700'
-        : 'bg-red-50 border-red-200 text-red-600'
+        ? 'border-[#34D399]/25 bg-[#34D399]/5 text-[#34D399]'
+        : 'border-red-500/25 bg-red-500/5 text-red-400'
     }`}>
       {positive
-        ? <CheckCircle2 className="h-3.5 w-3.5" />
-        : <XCircle className="h-3.5 w-3.5" />}
+        ? <CheckCircle2 className="h-3 w-3" />
+        : <XCircle className="h-3 w-3" />}
       {label}
     </div>
   );
@@ -193,12 +192,11 @@ export default function HousingDetail() {
   if (loading) {
     return (
       <div className="max-w-3xl mx-auto py-6 space-y-6 animate-pulse">
-        <div className="h-5 w-24 bg-slate-200 rounded-lg" />
-        <div className="h-80 bg-slate-200 rounded-2xl" />
-        <div className="space-y-4">
-          <div className="h-8 w-1/2 bg-slate-200 rounded-lg" />
-          <div className="h-4 w-3/4 bg-slate-100 rounded-lg" />
-          <div className="h-4 w-2/3 bg-slate-100 rounded-lg" />
+        <div className="h-4 w-20 bg-[#17171A] rounded-sm" />
+        <div className="h-72 bg-[#17171A] rounded-md" />
+        <div className="space-y-3">
+          <div className="h-7 w-1/3 bg-[#17171A] rounded-sm" />
+          <div className="h-4 w-3/4 bg-[#17171A] rounded-sm" />
         </div>
       </div>
     );
@@ -206,9 +204,9 @@ export default function HousingDetail() {
 
   if (error) {
     return (
-      <div className="max-w-3xl mx-auto py-20 text-center">
-        <p className="text-slate-500 font-medium mb-4">{error}</p>
-        <Link to="/housing" className="text-sm text-indigo-600 font-semibold hover:underline">
+      <div className="max-w-3xl mx-auto py-20 text-center border border-[#26262B] bg-[#111113] rounded-md p-8">
+        <p className="text-xs text-red-400 font-medium mb-3">{error}</p>
+        <Link to="/housing" className="text-xs text-[#F5A623] hover:underline font-mono">
           ← Back to listings
         </Link>
       </div>
@@ -216,7 +214,7 @@ export default function HousingDetail() {
   }
 
   const availableDate = new Date(listing.available_from).toLocaleDateString('en-IN', {
-    day: 'numeric', month: 'long', year: 'numeric',
+    day: 'numeric', month: 'short', year: 'numeric',
   });
   const postedDate = new Date(listing.created_at).toLocaleDateString('en-IN', {
     day: 'numeric', month: 'short', year: 'numeric',
@@ -233,14 +231,14 @@ export default function HousingDetail() {
         />
       )}
 
-      <div className="max-w-3xl mx-auto py-6 space-y-6">
+      <div className="max-w-3xl mx-auto py-4 space-y-6">
         {/* Back + Actions */}
         <div className="flex items-center justify-between">
           <button
             onClick={() => navigate(-1)}
-            className="flex items-center gap-1.5 text-sm text-slate-500 hover:text-indigo-600 font-medium transition"
+            className="flex items-center gap-1.5 text-xs text-[#8B8B92] hover:text-[#F2F2F3] font-medium transition"
           >
-            <ArrowLeft className="h-4 w-4" /> Back
+            <ArrowLeft className="h-3.5 w-3.5" /> Back
           </button>
 
           <div className="flex items-center gap-2">
@@ -249,15 +247,15 @@ export default function HousingDetail() {
               <>
                 <Link
                   to={`/housing/${id}/edit`}
-                  className="flex items-center gap-1.5 px-4 py-2 border border-slate-200 text-sm font-semibold text-slate-700 rounded-xl hover:bg-slate-50 transition"
+                  className="flex items-center gap-1.5 px-3 py-1 border border-[#26262B] text-xs font-medium text-[#8B8B92] hover:text-[#F2F2F3] hover:bg-[#17171A] rounded-sm transition"
                 >
-                  <Edit className="h-4 w-4" /> Edit
+                  <Edit className="h-3.5 w-3.5" /> Edit
                 </Link>
                 <button
                   onClick={() => setShowDeleteModal(true)}
-                  className="flex items-center gap-1.5 px-4 py-2 border border-red-200 text-sm font-semibold text-red-600 rounded-xl hover:bg-red-50 transition"
+                  className="flex items-center gap-1.5 px-3 py-1 border border-red-500/30 text-xs font-medium text-red-400 hover:bg-red-500/10 rounded-sm transition"
                 >
-                  <Trash2 className="h-4 w-4" /> Delete
+                  <Trash2 className="h-3.5 w-3.5" /> Delete
                 </button>
               </>
             )}
@@ -268,80 +266,94 @@ export default function HousingDetail() {
         <ImageCarousel images={listing.images} />
 
         {/* Title block */}
-        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 border-b border-[#26262B] pb-4">
           <div className="space-y-2">
-            <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${
-              isRoomAvailable ? 'bg-blue-100 text-blue-700' : 'bg-violet-100 text-violet-700'
-            }`}>
-              {isRoomAvailable ? '🏠 Room Available' : '🤝 Roommate Needed'}
-            </span>
-            {!listing.is_active && (
-              <span className="ml-2 inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-500">
-                Inactive
-              </span>
-            )}
+            <div className="flex items-center gap-2">
+              {isRoomAvailable ? (
+                <span className="px-2 py-0.5 rounded-sm border border-[#34D399]/30 bg-[#34D399]/5 text-[#34D399] text-[10px] font-mono">
+                  Room Available
+                </span>
+              ) : (
+                <span className="px-2 py-0.5 rounded-sm border border-[#38BDF8]/30 bg-[#38BDF8]/5 text-[#38BDF8] text-[10px] font-mono">
+                  Roommate Needed
+                </span>
+              )}
+              {!listing.is_active && (
+                <span className="px-2 py-0.5 rounded-sm border border-[#26262B] bg-[#17171A] text-[#80808A] text-[10px] font-mono">
+                  Inactive
+                </span>
+              )}
+            </div>
+
             <div className="flex items-baseline gap-1">
-              <IndianRupee className="h-5 w-5 text-indigo-600" />
-              <span className="text-3xl font-extrabold text-slate-900">
+              <IndianRupee className="h-5 w-5 text-[#F5A623]" />
+              <span className="text-2xl sm:text-3xl font-mono font-semibold text-[#F2F2F3]">
                 {listing.rent_per_person.toLocaleString('en-IN')}
               </span>
-              <span className="text-slate-400 text-sm font-medium">/month per person</span>
+              <span className="text-[#80808A] text-xs font-mono">/mo per person</span>
             </div>
+
             {listing.security_deposit && (
-              <p className="text-sm text-slate-400">
+              <p className="text-xs text-[#80808A] font-mono">
                 Security deposit: ₹{listing.security_deposit.toLocaleString('en-IN')}
               </p>
             )}
           </div>
 
-          <p className="text-xs text-slate-400 sm:text-right shrink-0">
-            Posted on {postedDate}
+          <p className="text-[11px] font-mono text-[#80808A] sm:text-right shrink-0">
+            Posted {postedDate}
           </p>
         </div>
 
         {/* Info grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           <InfoRow
-            icon={<MapPin className="h-4 w-4" />}
+            icon={<MapPin className="h-3.5 w-3.5" />}
             label="Location"
             value={listing.location || 'Not specified'}
           />
           <InfoRow
-            icon={<Users className="h-4 w-4" />}
+            icon={<Users className="h-3.5 w-3.5" />}
             label="Sharing"
             value={SHARING_LABELS[listing.sharing_type] || listing.sharing_type}
           />
           <InfoRow
-            icon={<Calendar className="h-4 w-4" />}
-            label="Available From"
+            icon={<Calendar className="h-3.5 w-3.5" />}
+            label="Available"
             value={availableDate}
           />
           {listing.distance_km && (
             <InfoRow
-              icon={<MapPin className="h-4 w-4" />}
+              icon={<MapPin className="h-3.5 w-3.5" />}
               label="Distance"
-              value={`${listing.distance_km} km from college`}
+              value={`${listing.distance_km} km`}
             />
           )}
         </div>
 
         {/* Description */}
-        <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
-          <h2 className="font-bold text-slate-900 mb-3">About this listing</h2>
-          <p className="text-sm text-slate-600 leading-relaxed whitespace-pre-wrap">
-            {listing.description}
-          </p>
-        </div>
+        {listing.description && (
+          <div className="bg-[#111113] rounded-md border border-[#26262B] p-5">
+            <h2 className="text-xs font-semibold text-[#F2F2F3] font-mono uppercase tracking-wider mb-2.5">
+              Description
+            </h2>
+            <p className="text-xs text-[#8B8B92] leading-relaxed whitespace-pre-wrap">
+              {listing.description}
+            </p>
+          </div>
+        )}
 
         {/* Amenities */}
         {listing.amenities?.length > 0 && (
-          <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
-            <h2 className="font-bold text-slate-900 mb-3">Amenities</h2>
-            <div className="flex flex-wrap gap-2">
+          <div className="bg-[#111113] rounded-md border border-[#26262B] p-5">
+            <h2 className="text-xs font-semibold text-[#F2F2F3] font-mono uppercase tracking-wider mb-2.5">
+              Amenities
+            </h2>
+            <div className="flex flex-wrap gap-1.5">
               {listing.amenities.map((amenity) => (
                 <span
                   key={amenity}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-indigo-50 text-indigo-700 rounded-full text-sm font-medium capitalize"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#17171A] border border-[#26262B] text-[#8B8B92] rounded-sm text-xs font-mono capitalize"
                 >
                   {AMENITY_ICONS[amenity.toLowerCase()] || null}
                   {amenity}
@@ -353,15 +365,17 @@ export default function HousingDetail() {
 
         {/* Roommate Preferences */}
         {isRoomAvailable && (listing.pref_veg !== null || listing.pref_smoking !== null || listing.pref_study_friendly !== null || listing.pref_sleep_schedule) && (
-          <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
-            <h2 className="font-bold text-slate-900 mb-3">Roommate Preferences</h2>
+          <div className="bg-[#111113] rounded-md border border-[#26262B] p-5">
+            <h2 className="text-xs font-semibold text-[#F2F2F3] font-mono uppercase tracking-wider mb-2.5">
+              Roommate Preferences
+            </h2>
             <div className="flex flex-wrap gap-2">
               <PrefChip label="Vegetarian" value={listing.pref_veg} />
               <PrefChip label="Non-smoking" value={listing.pref_smoking === false ? true : listing.pref_smoking === true ? false : null} />
               <PrefChip label="Study Friendly" value={listing.pref_study_friendly} />
               {listing.pref_sleep_schedule && (
-                <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600 border border-slate-200 capitalize">
-                  🌙 {listing.pref_sleep_schedule} person
+                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-sm text-xs font-mono bg-[#17171A] border border-[#26262B] text-[#8B8B92] capitalize">
+                  {listing.pref_sleep_schedule} schedule
                 </div>
               )}
             </div>
@@ -369,16 +383,20 @@ export default function HousingDetail() {
         )}
 
         {/* Poster + Contact */}
-        <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
-          <h2 className="font-bold text-slate-900 mb-4">Posted by</h2>
+        <div className="bg-[#111113] rounded-md border border-[#26262B] p-5">
+          <h2 className="text-xs font-semibold text-[#F2F2F3] font-mono uppercase tracking-wider mb-3">
+            Posted By
+          </h2>
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold text-lg">
+              <div className="h-9 w-9 rounded-full bg-[#17171A] border border-[#26262B] flex items-center justify-center text-[#F2F2F3] font-semibold text-sm">
                 {listing.user?.name?.charAt(0) || '?'}
               </div>
               <div>
-                <p className="font-semibold text-slate-800">{listing.user?.name}</p>
-                <p className="text-xs text-slate-400">Room {listing.user?.room_number}, Block {listing.user?.block_number}</p>
+                <p className="text-xs font-medium text-[#F2F2F3]">{listing.user?.name}</p>
+                <p className="text-[11px] font-mono text-[#80808A]">
+                  Room {listing.user?.room_number}, Block {listing.user?.block_number}
+                </p>
               </div>
             </div>
 
@@ -387,17 +405,17 @@ export default function HousingDetail() {
                 href={getWhatsAppUrl(listing.whatsapp, buildHousingWhatsAppMsg(listing))}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm rounded-xl shadow-md shadow-emerald-200 transition"
+                className="flex items-center gap-1.5 px-3.5 py-2 bg-[#34D399] hover:bg-[#2EB882] text-[#0A0A0B] font-semibold text-xs rounded-md transition"
               >
-                <Phone className="h-4 w-4" />
-                WhatsApp
+                <Phone className="h-3.5 w-3.5" />
+                <span>WhatsApp</span>
               </a>
             ) : (
               <Link
                 to="/login"
-                className="flex items-center gap-2 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm rounded-xl shadow-md shadow-indigo-200 transition"
+                className="flex items-center gap-1.5 px-3.5 py-2 bg-[#F5A623] hover:bg-[#E0921B] text-[#0A0A0B] font-semibold text-xs rounded-md transition"
               >
-                Login to contact
+                <span>Login to contact</span>
               </Link>
             )}
           </div>

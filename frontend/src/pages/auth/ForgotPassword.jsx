@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authAPI } from '../../api/authAPI';
-import { Mail, KeyRound, AlertCircle, ArrowLeft } from 'lucide-react';
+import { Mail, KeyRound, AlertCircle, ArrowLeft, Loader2 } from 'lucide-react';
+
+const inputCls =
+  'w-full pl-9 pr-3 py-2 bg-[#111113] border border-[#26262B] rounded-md text-xs text-[#F2F2F3] placeholder:text-[#55555C] focus:outline-none focus:border-[#F5A623] transition-colors font-mono';
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState('');
@@ -25,34 +28,34 @@ export default function ForgotPassword() {
   };
 
   return (
-    <div className="max-w-md mx-auto my-16 p-8 bg-white rounded-2xl shadow-xl border border-slate-100">
-      <div className="text-center mb-8">
-        <div className="mx-auto w-12 h-12 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center mb-3">
-          <KeyRound className="h-6 w-6" />
+    <div className="max-w-md mx-auto my-12 p-6 sm:p-8 bg-[#111113] rounded-md border border-[#26262B]">
+      <div className="text-center mb-6">
+        <div className="mx-auto w-10 h-10 bg-[#17171A] border border-[#26262B] text-[#F5A623] rounded-md flex items-center justify-center mb-3">
+          <KeyRound className="h-5 w-5" />
         </div>
-        <h1 className="text-2xl font-bold text-slate-900">Forgot Password?</h1>
-        <p className="text-sm text-slate-500 mt-1">Enter your college email to receive a 6-digit OTP code</p>
+        <h1 className="text-xl font-semibold text-[#F2F2F3] tracking-tight">Forgot Password</h1>
+        <p className="text-xs text-[#8A8A93] mt-1">Enter your college email to receive a 6-digit OTP code</p>
       </div>
 
       {error && (
-        <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 rounded-xl flex items-center gap-3 text-sm">
-          <AlertCircle className="h-5 w-5 shrink-0" />
+        <div className="mb-5 p-3 bg-[#17171A] border border-[#F87171]/30 text-[#F87171] rounded-md flex items-center gap-2 text-xs">
+          <AlertCircle className="h-4 w-4 shrink-0" />
           <span>{error}</span>
         </div>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block text-xs font-semibold text-slate-700 mb-1">College Email</label>
+        <div className="flex flex-col gap-1.5">
+          <label className="text-[11px] font-mono uppercase tracking-wider text-[#8A8A93]">College Email</label>
           <div className="relative">
-            <Mail className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+            <Mail className="absolute left-3 top-2.5 h-3.5 w-3.5 text-[#8A8A93]" />
             <input
               type="email"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="student@college.edu"
-              className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className={inputCls}
             />
           </div>
         </div>
@@ -60,16 +63,22 @@ export default function ForgotPassword() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl shadow-lg shadow-indigo-200 transition disabled:opacity-50 mt-4"
+          className="w-full flex items-center justify-center gap-2 py-2.5 bg-[#F5A623] hover:bg-[#D98E1C] text-[#0A0A0B] font-medium text-xs rounded-md transition-colors disabled:opacity-50 mt-4"
         >
-          {loading ? 'Sending OTP...' : 'Send OTP Code'}
+          {loading ? (
+            <>
+              <Loader2 className="h-3.5 w-3.5 animate-spin" /> Sending OTP...
+            </>
+          ) : (
+            'Send OTP Code'
+          )}
         </button>
       </form>
 
       <div className="text-center mt-6">
         <button
           onClick={() => navigate('/login')}
-          className="inline-flex items-center gap-1.5 text-xs text-slate-500 hover:text-slate-800 transition"
+          className="inline-flex items-center gap-1.5 text-xs text-[#8A8A93] hover:text-[#F2F2F3] transition-colors"
         >
           <ArrowLeft className="h-3.5 w-3.5" /> Back to Login
         </button>
