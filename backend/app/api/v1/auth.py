@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta, timezone
 from fastapi import APIRouter, Depends, HTTPException, status, Response, Cookie
+from sqlalchemy import func
 from sqlalchemy.orm import Session
 from app.db.session import get_db
 from app.models.user import User
@@ -68,7 +69,8 @@ def login(credentials: LoginRequest, response: Response, db: Session = Depends(g
     """
     Login student with college email and password. Returns Access & Refresh tokens.
     """
-    user = db.query(User).filter(User.college_email == credentials.college_email).first()
+    clean_email = (credentials.college_email or "").strip().lower()
+    user = db.query(User).filter(func.lower(User.college_email) == clean_email).first()
     if not user or not verify_password(credentials.password, user.password_hash):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
