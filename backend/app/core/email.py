@@ -4,16 +4,20 @@ from fastapi_mail import FastMail, MessageSchema, ConnectionConfig, MessageType
 from pydantic import EmailStr
 from app.core.config import settings
 
+# Fallback email to satisfy Pydantic EmailStr validation if MAIL_FROM is empty or invalid
+mail_from = settings.MAIL_FROM if (settings.MAIL_FROM and "@" in settings.MAIL_FROM) else "noreply@campushub.edu"
+has_smtp_credentials = bool(settings.MAIL_USERNAME and settings.MAIL_PASSWORD)
+
 # FastAPI-Mail connection configuration
 mail_config = ConnectionConfig(
-    MAIL_USERNAME=settings.MAIL_USERNAME,
-    MAIL_PASSWORD=settings.MAIL_PASSWORD,
-    MAIL_FROM=settings.MAIL_FROM,
-    MAIL_PORT=settings.MAIL_PORT,
-    MAIL_SERVER=settings.MAIL_SERVER,
+    MAIL_USERNAME=settings.MAIL_USERNAME or "noreply@campushub.edu",
+    MAIL_PASSWORD=settings.MAIL_PASSWORD or "dummy_password",
+    MAIL_FROM=mail_from,
+    MAIL_PORT=settings.MAIL_PORT or 587,
+    MAIL_SERVER=settings.MAIL_SERVER or "smtp.gmail.com",
     MAIL_STARTTLS=True,
     MAIL_SSL_TLS=False,
-    USE_CREDENTIALS=True,
+    USE_CREDENTIALS=has_smtp_credentials,
     VALIDATE_CERTS=True,
 )
 
@@ -27,6 +31,10 @@ async def send_otp_email(email_to: str, otp: str) -> bool:
     """
     Send password reset OTP code to student's college email.
     """
+    if not has_smtp_credentials:
+        print(f"[CAMPUSHUB OTP INFO] SMTP credentials not configured. OTP for {email_to} is: {otp}")
+        return True
+
     html_content = f"""
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px;">
         <h2 style="color: #4F46E5; text-align: center;">CampusHub Password Reset</h2>

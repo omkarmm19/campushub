@@ -24,7 +24,7 @@ class Settings(BaseSettings):
     # Email (Optional - for OTP password reset)
     MAIL_USERNAME: str = ""
     MAIL_PASSWORD: str = ""
-    MAIL_FROM: str = ""
+    MAIL_FROM: str = "noreply@campushub.edu"
     MAIL_SERVER: str = "smtp.gmail.com"
     MAIL_PORT: int = 587
 
