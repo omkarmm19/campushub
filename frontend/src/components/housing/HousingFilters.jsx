@@ -60,7 +60,7 @@ export default function HousingFilters({ filters, onChange, resultCount }) {
                 onClick={() => handleChange('listing_type', t.value)}
                 className={`flex-1 py-1 px-2 rounded-sm text-xs font-medium transition ${
                   filters.listing_type === t.value
-                    ? 'bg-[#F5A623]/10 text-[#F5A623] border border-[#F5A623]/30'
+                    ? 'bg-[#22D3EE]/10 text-[#22D3EE] border border-[#22D3EE]/30'
                     : 'text-[#8B8B92] hover:text-[#F2F2F3] border border-transparent'
                 }`}
               >
@@ -82,7 +82,7 @@ export default function HousingFilters({ filters, onChange, resultCount }) {
                 onClick={() => handleChange('sharing_type', t.value)}
                 className={`flex-1 py-1 px-2 rounded-sm text-xs font-medium transition ${
                   filters.sharing_type === t.value
-                    ? 'bg-[#F5A623]/10 text-[#F5A623] border border-[#F5A623]/30'
+                    ? 'bg-[#22D3EE]/10 text-[#22D3EE] border border-[#22D3EE]/30'
                     : 'text-[#8B8B92] hover:text-[#F2F2F3] border border-transparent'
                 }`}
               >
@@ -102,7 +102,7 @@ export default function HousingFilters({ filters, onChange, resultCount }) {
             placeholder="e.g. 8000"
             value={filters.max_rent}
             onChange={(e) => handleChange('max_rent', e.target.value)}
-            className="w-32 px-2.5 py-1.5 bg-[#17171A] border border-[#26262B] rounded-md text-xs text-[#F2F2F3] placeholder:text-[#80808A] focus:outline-none focus:border-[#F5A623] font-mono"
+            className="w-32 px-2.5 py-1.5 bg-[#17171A] border border-[#26262B] rounded-md text-xs text-[#F2F2F3] placeholder:text-[#80808A] focus:outline-none focus:border-[#22D3EE] font-mono"
           />
         </div>
 
@@ -117,7 +117,7 @@ export default function HousingFilters({ filters, onChange, resultCount }) {
             placeholder="e.g. 3"
             value={filters.max_distance}
             onChange={(e) => handleChange('max_distance', e.target.value)}
-            className="w-28 px-2.5 py-1.5 bg-[#17171A] border border-[#26262B] rounded-md text-xs text-[#F2F2F3] placeholder:text-[#80808A] focus:outline-none focus:border-[#F5A623] font-mono"
+            className="w-28 px-2.5 py-1.5 bg-[#17171A] border border-[#26262B] rounded-md text-xs text-[#F2F2F3] placeholder:text-[#80808A] focus:outline-none focus:border-[#22D3EE] font-mono"
           />
         </div>
       </div>

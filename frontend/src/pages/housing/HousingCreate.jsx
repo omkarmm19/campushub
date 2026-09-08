@@ -33,7 +33,7 @@ function StepBar({ current }) {
             i < current
               ? 'bg-[#34D399]/15 text-[#34D399] border border-[#34D399]/30'
               : i === current
-              ? 'bg-[#F5A623] text-[#0A0A0B] font-semibold'
+              ? 'bg-[#22D3EE] text-[#0A0A0B] font-semibold'
               : 'bg-[#17171A] border border-[#26262B] text-[#71717A]'
           }`}>
             {i < current ? <Check className="h-3 w-3" /> : i + 1}
@@ -59,7 +59,7 @@ function Field({ label, required, children, hint }) {
   return (
     <div className="flex flex-col gap-1.5">
       <label className="text-[11px] font-mono uppercase tracking-wider text-[#8B8B92]">
-        {label} {required && <span className="text-[#F5A623]">*</span>}
+        {label} {required && <span className="text-[#22D3EE]">*</span>}
       </label>
       {children}
       {hint && <p className="text-[11px] font-mono text-[#71717A]">{hint}</p>}
@@ -68,7 +68,7 @@ function Field({ label, required, children, hint }) {
 }
 
 // Input style helper
-const inputCls = 'w-full px-3 py-2 bg-[#17171A] border border-[#26262B] rounded-md text-xs text-[#F2F2F3] focus:outline-none focus:border-[#F5A623] placeholder:text-[#71717A] font-mono';
+const inputCls = 'w-full px-3 py-2 bg-[#17171A] border border-[#26262B] rounded-md text-xs text-[#F2F2F3] focus:outline-none focus:border-[#22D3EE] placeholder:text-[#71717A] font-mono';
 
 export default function HousingCreate() {
   const navigate = useNavigate();
@@ -213,7 +213,7 @@ export default function HousingCreate() {
                     onClick={() => set('listing_type', t.value)}
                     className={`p-3 rounded-md border text-left transition ${
                       form.listing_type === t.value
-                        ? 'border-[#F5A623] bg-[#F5A623]/10 text-[#F5A623]'
+                        ? 'border-[#22D3EE] bg-[#22D3EE]/10 text-[#22D3EE]'
                         : 'border-[#26262B] bg-[#17171A] hover:border-[#3A3A42] text-[#8B8B92]'
                     }`}
                   >
@@ -260,7 +260,7 @@ export default function HousingCreate() {
                     onClick={() => set('sharing_type', s.value)}
                     className={`p-2.5 rounded-md border text-center transition ${
                       form.sharing_type === s.value
-                        ? 'border-[#F5A623] bg-[#F5A623]/10 text-[#F5A623]'
+                        ? 'border-[#22D3EE] bg-[#22D3EE]/10 text-[#22D3EE]'
                         : 'border-[#26262B] bg-[#17171A] hover:border-[#3A3A42] text-[#8B8B92]'
                     }`}
                   >
@@ -335,11 +335,11 @@ export default function HousingCreate() {
                       onClick={() => toggleAmenity(a)}
                       className={`px-2.5 py-1 rounded-sm text-xs font-mono border transition ${
                         active
-                          ? 'border-[#F5A623]/30 bg-[#F5A623]/10 text-[#F5A623]'
+                          ? 'border-[#22D3EE]/30 bg-[#22D3EE]/10 text-[#22D3EE]'
                           : 'border-[#26262B] bg-[#17171A] text-[#8B8B92] hover:text-[#F2F2F3]'
                       }`}
                     >
-                      {active && <span className="mr-1 text-[#F5A623]">✓</span>}
+                      {active && <span className="mr-1 text-[#22D3EE]">✓</span>}
                       {a}
                     </button>
                   );
@@ -450,7 +450,7 @@ export default function HousingCreate() {
                       <X className="h-3 w-3" />
                     </button>
                     {i === 0 && (
-                      <span className="absolute bottom-1 left-1 px-1.5 py-0.2 bg-[#0A0A0B]/80 border border-[#26262B] text-[#F5A623] text-[10px] font-mono rounded-sm">
+                      <span className="absolute bottom-1 left-1 px-1.5 py-0.2 bg-[#0A0A0B]/80 border border-[#26262B] text-[#22D3EE] text-[10px] font-mono rounded-sm">
                         Cover
                       </span>
                     )}
@@ -522,7 +522,7 @@ export default function HousingCreate() {
           <button
             type="button"
             onClick={nextStep}
-            className="flex items-center gap-1.5 px-4 py-2 bg-[#F5A623] hover:bg-[#E0921B] text-[#0A0A0B] text-xs font-semibold rounded-md transition"
+            className="flex items-center gap-1.5 px-4 py-2 bg-[#22D3EE] hover:bg-[#0EA5C4] text-[#0A0A0B] text-xs font-semibold rounded-md transition"
           >
             <span>Next</span>
             <ChevronRight className="h-3.5 w-3.5" />
@@ -532,7 +532,7 @@ export default function HousingCreate() {
             type="button"
             onClick={handleSubmit}
             disabled={submitting}
-            className="flex items-center gap-1.5 px-4 py-2 bg-[#F5A623] hover:bg-[#E0921B] text-[#0A0A0B] text-xs font-semibold rounded-md transition disabled:opacity-60"
+            className="flex items-center gap-1.5 px-4 py-2 bg-[#22D3EE] hover:bg-[#0EA5C4] text-[#0A0A0B] text-xs font-semibold rounded-md transition disabled:opacity-60"
           >
             {submitting ? (
               <><Loader2 className="h-3.5 w-3.5 animate-spin" /> Publishing...</>

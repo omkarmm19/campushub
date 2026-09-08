@@ -20,7 +20,7 @@ const TYPE_META = {
 const OPP_TYPES = ['internship', 'hackathon', 'workshop', 'competition', 'other'];
 
 const inputCls =
-  'w-full px-3 py-2 bg-[#111113] border border-[#26262B] focus:border-[#F5A623] rounded-md text-xs text-[#F2F2F3] placeholder-[#55555C] focus:outline-none transition-colors';
+  'w-full px-3 py-2 bg-[#111113] border border-[#26262B] focus:border-[#22D3EE] rounded-md text-xs text-[#F2F2F3] placeholder-[#55555C] focus:outline-none transition-colors';
 
 function DeleteModal({ onConfirm, onCancel, loading }) {
   return (
@@ -114,7 +114,7 @@ export function OpportunitiesList() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-[#26262B]">
         <div>
           <div className="flex items-center gap-2.5 mb-1">
-            <Briefcase className="h-5 w-5 text-[#F5A623] shrink-0" />
+            <Briefcase className="h-5 w-5 text-[#22D3EE] shrink-0" />
             <h1 className="text-2xl font-semibold text-[#F2F2F3] tracking-tight">Opportunities</h1>
           </div>
           <p className="text-xs text-[#8A8A93]">Internships, hackathons &amp; technical workshops</p>
@@ -122,7 +122,7 @@ export function OpportunitiesList() {
         {user && (
           <Link
             to="/opportunities/create"
-            className="inline-flex items-center gap-2 px-4 py-2 bg-[#F5A623] hover:bg-[#D48B17] text-[#0A0A0B] font-medium text-xs rounded-md transition-colors shadow-none"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-[#22D3EE] hover:bg-[#0EA5C4] text-[#0A0A0B] font-medium text-xs rounded-md transition-colors shadow-none"
           >
             <Plus className="h-4 w-4" /> Post Opportunity
           </Link>
@@ -135,7 +135,7 @@ export function OpportunitiesList() {
           onClick={() => setFilter('')}
           className={`px-3 py-1.5 rounded-sm text-xs font-medium border transition-colors ${
             !filter
-              ? 'border-[#F5A623] bg-[#F5A623]/10 text-[#F5A623]'
+              ? 'border-[#22D3EE] bg-[#22D3EE]/10 text-[#22D3EE]'
               : 'border-[#26262B] bg-[#17171A] text-[#8A8A93] hover:border-[#38383F] hover:text-[#F2F2F3]'
           }`}
         >
@@ -147,7 +147,7 @@ export function OpportunitiesList() {
             onClick={() => setFilter(filter === t ? '' : t)}
             className={`px-3 py-1.5 rounded-sm text-xs font-medium border transition-colors ${
               filter === t
-                ? 'border-[#F5A623] bg-[#F5A623]/10 text-[#F5A623]'
+                ? 'border-[#22D3EE] bg-[#22D3EE]/10 text-[#22D3EE]'
                 : 'border-[#26262B] bg-[#17171A] text-[#8A8A93] hover:border-[#38383F] hover:text-[#F2F2F3]'
             }`}
           >
@@ -196,7 +196,7 @@ export function OpportunitiesList() {
                         expired
                           ? 'border-[#F87171]/40 bg-[#F87171]/10 text-[#F87171]'
                           : days <= 3
-                          ? 'border-[#F5A623]/40 bg-[#F5A623]/10 text-[#F5A623]'
+                          ? 'border-[#22D3EE]/40 bg-[#22D3EE]/10 text-[#22D3EE]'
                           : 'border-[#26262B] bg-[#17171A] text-[#8A8A93]'
                       }`}
                     >
@@ -206,7 +206,7 @@ export function OpportunitiesList() {
                 </div>
 
                 <div>
-                  <h3 className="font-semibold text-[#F2F2F3] group-hover:text-[#F5A623] transition-colors line-clamp-1 text-sm">
+                  <h3 className="font-semibold text-[#F2F2F3] group-hover:text-[#22D3EE] transition-colors line-clamp-1 text-sm">
                     {opp.title}
                   </h3>
                   {opp.organization && (
@@ -252,7 +252,7 @@ export function OpportunitiesList() {
           {user && (
             <Link
               to="/opportunities/create"
-              className="mt-4 inline-flex items-center gap-1.5 px-4 py-2 bg-[#F5A623] hover:bg-[#D48B17] text-[#0A0A0B] font-medium text-xs rounded-md transition-colors"
+              className="mt-4 inline-flex items-center gap-1.5 px-4 py-2 bg-[#22D3EE] hover:bg-[#0EA5C4] text-[#0A0A0B] font-medium text-xs rounded-md transition-colors"
             >
               <Plus className="h-3.5 w-3.5" /> Post First Opportunity
             </Link>
@@ -261,9 +261,9 @@ export function OpportunitiesList() {
       )}
 
       {!user && !loading && opps.length > 0 && (
-        <div className="p-3.5 bg-[#17171A] border border-[#F5A623]/30 rounded-md flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="p-3.5 bg-[#17171A] border border-[#22D3EE]/30 rounded-md flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center gap-2.5">
-            <Shield className="h-4 w-4 text-[#F5A623] shrink-0" />
+            <Shield className="h-4 w-4 text-[#22D3EE] shrink-0" />
             <p className="text-xs text-[#8B8B92]">
               Log in with your college email to post internships, hackathons, and opportunities.
             </p>
@@ -312,7 +312,7 @@ export function OpportunityDetail() {
   if (loading) {
     return (
       <div className="max-w-2xl mx-auto py-16 flex justify-center">
-        <Loader2 className="h-6 w-6 animate-spin text-[#F5A623]" />
+        <Loader2 className="h-6 w-6 animate-spin text-[#22D3EE]" />
       </div>
     );
   }
@@ -321,7 +321,7 @@ export function OpportunityDetail() {
     return (
       <div className="max-w-2xl mx-auto py-16 text-center">
         <p className="text-xs text-[#8A8A93] mb-3">{error}</p>
-        <Link to="/opportunities" className="text-xs text-[#F5A623] hover:underline font-medium">
+        <Link to="/opportunities" className="text-xs text-[#22D3EE] hover:underline font-medium">
           ← Back to Opportunities
         </Link>
       </div>
@@ -398,7 +398,7 @@ export function OpportunityDetail() {
                 href={opp.apply_link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-[#F5A623] hover:bg-[#D48B17] text-[#0A0A0B] font-medium text-xs rounded-md transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-[#22D3EE] hover:bg-[#0EA5C4] text-[#0A0A0B] font-medium text-xs rounded-md transition-colors"
               >
                 Apply Now <ExternalLink className="h-3.5 w-3.5" />
               </a>
@@ -462,7 +462,7 @@ export function OpportunityCreate() {
   return (
     <div className="max-w-xl mx-auto py-6">
       <div className="mb-5 flex items-center gap-2.5 pb-2 border-b border-[#26262B]">
-        <Briefcase className="h-5 w-5 text-[#F5A623] shrink-0" />
+        <Briefcase className="h-5 w-5 text-[#22D3EE] shrink-0" />
         <div>
           <h1 className="text-xl font-semibold text-[#F2F2F3] tracking-tight">Post an Opportunity</h1>
           <p className="text-xs text-[#8A8A93]">Share internships, hackathons &amp; technical workshops</p>
@@ -487,7 +487,7 @@ export function OpportunityCreate() {
                 onClick={() => set('opp_type', t)}
                 className={`px-3 py-1.5 rounded-sm text-xs font-medium border transition-colors ${
                   form.opp_type === t
-                    ? 'border-[#F5A623] bg-[#F5A623]/10 text-[#F5A623]'
+                    ? 'border-[#22D3EE] bg-[#22D3EE]/10 text-[#22D3EE]'
                     : 'border-[#26262B] bg-[#17171A] text-[#8A8A93] hover:border-[#38383F]'
                 }`}
               >
@@ -569,7 +569,7 @@ export function OpportunityCreate() {
           <button
             type="submit"
             disabled={submitting}
-            className="flex-1 flex items-center justify-center gap-1.5 py-2.5 bg-[#F5A623] hover:bg-[#D48B17] text-[#0A0A0B] rounded-md font-medium text-xs transition-colors disabled:opacity-60"
+            className="flex-1 flex items-center justify-center gap-1.5 py-2.5 bg-[#22D3EE] hover:bg-[#0EA5C4] text-[#0A0A0B] rounded-md font-medium text-xs transition-colors disabled:opacity-60"
           >
             {submitting ? (
               <>
@@ -645,7 +645,7 @@ export function OpportunityEdit() {
   if (loading) {
     return (
       <div className="max-w-xl mx-auto py-16 flex justify-center">
-        <Loader2 className="h-6 w-6 animate-spin text-[#F5A623]" />
+        <Loader2 className="h-6 w-6 animate-spin text-[#22D3EE]" />
       </div>
     );
   }
@@ -661,7 +661,7 @@ export function OpportunityEdit() {
   return (
     <div className="max-w-xl mx-auto py-6">
       <div className="mb-5 flex items-center gap-2.5 pb-2 border-b border-[#26262B]">
-        <Briefcase className="h-5 w-5 text-[#F5A623] shrink-0" />
+        <Briefcase className="h-5 w-5 text-[#22D3EE] shrink-0" />
         <div>
           <h1 className="text-xl font-semibold text-[#F2F2F3] tracking-tight">Edit Opportunity</h1>
           <p className="text-xs text-[#8A8A93]">Update opportunity details</p>
@@ -686,7 +686,7 @@ export function OpportunityEdit() {
                 onClick={() => set('opp_type', t)}
                 className={`px-3 py-1.5 rounded-sm text-xs font-medium border transition-colors ${
                   form.opp_type === t
-                    ? 'border-[#F5A623] bg-[#F5A623]/10 text-[#F5A623]'
+                    ? 'border-[#22D3EE] bg-[#22D3EE]/10 text-[#22D3EE]'
                     : 'border-[#26262B] bg-[#17171A] text-[#8A8A93] hover:border-[#38383F]'
                 }`}
               >
@@ -763,7 +763,7 @@ export function OpportunityEdit() {
           <button
             type="submit"
             disabled={submitting}
-            className="flex-1 flex items-center justify-center gap-1.5 py-2.5 bg-[#F5A623] hover:bg-[#D48B17] text-[#0A0A0B] rounded-md font-medium text-xs transition-colors disabled:opacity-60"
+            className="flex-1 flex items-center justify-center gap-1.5 py-2.5 bg-[#22D3EE] hover:bg-[#0EA5C4] text-[#0A0A0B] rounded-md font-medium text-xs transition-colors disabled:opacity-60"
           >
             {submitting ? (
               <>

@@ -111,7 +111,7 @@ function UsersTab({ currentUserId }) {
   if (loading) {
     return (
       <div className="flex justify-center py-12">
-        <Loader2 className="h-6 w-6 animate-spin text-[#F5A623]" />
+        <Loader2 className="h-6 w-6 animate-spin text-[#22D3EE]" />
       </div>
     );
   }
@@ -144,14 +144,14 @@ function UsersTab({ currentUserId }) {
               key={u.id}
               className="flex items-center gap-3.5 px-4 py-3 hover:bg-[#17171A] transition-colors"
             >
-              <div className="h-8 w-8 rounded-sm bg-[#17171A] border border-[#26262B] flex items-center justify-center text-[#F5A623] font-mono text-xs font-semibold shrink-0">
+              <div className="h-8 w-8 rounded-sm bg-[#17171A] border border-[#26262B] flex items-center justify-center text-[#22D3EE] font-mono text-xs font-semibold shrink-0">
                 {u.name?.charAt(0)}
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
                   <p className="text-xs font-medium text-[#F2F2F3] truncate">{u.name}</p>
                   {u.is_admin && (
-                    <span className="px-1.5 py-0.5 bg-[#F5A623]/10 border border-[#F5A623]/30 text-[#F5A623] text-[10px] font-mono rounded-sm">
+                    <span className="px-1.5 py-0.5 bg-[#22D3EE]/10 border border-[#22D3EE]/30 text-[#22D3EE] text-[10px] font-mono rounded-sm">
                       Admin
                     </span>
                   )}
@@ -167,7 +167,7 @@ function UsersTab({ currentUserId }) {
                     title={u.is_admin ? 'Remove Admin' : 'Make Admin'}
                     className={`p-1.5 rounded-sm border transition-colors ${
                       u.is_admin
-                        ? 'border-[#F5A623]/40 bg-[#F5A623]/10 text-[#F5A623] hover:bg-[#F5A623]/20'
+                        ? 'border-[#22D3EE]/40 bg-[#22D3EE]/10 text-[#22D3EE] hover:bg-[#22D3EE]/20'
                         : 'border-[#26262B] text-[#8A8A93] hover:border-[#38383F] hover:text-[#F2F2F3] hover:bg-[#17171A]'
                     }`}
                   >
@@ -221,7 +221,7 @@ function ContentTab({ moduleKey, label, titleKey = 'title' }) {
   if (loading) {
     return (
       <div className="flex justify-center py-12">
-        <Loader2 className="h-6 w-6 animate-spin text-[#F5A623]" />
+        <Loader2 className="h-6 w-6 animate-spin text-[#22D3EE]" />
       </div>
     );
   }
@@ -333,7 +333,7 @@ export default function AdminPanel() {
     <div className="space-y-5 py-6">
       {/* Header */}
       <div className="flex items-center gap-2.5 pb-2 border-b border-[#26262B]">
-        <Shield className="h-5 w-5 text-[#F5A623] shrink-0" />
+        <Shield className="h-5 w-5 text-[#22D3EE] shrink-0" />
         <div>
           <h1 className="text-xl font-semibold text-[#F2F2F3] tracking-tight">Admin Panel</h1>
           <p className="text-xs text-[#8A8A93]">Platform governance and content management</p>
@@ -350,7 +350,7 @@ export default function AdminPanel() {
             onClick={() => setActiveTab(key)}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-sm text-xs font-medium border transition-colors cursor-pointer ${
               activeTab === key
-                ? 'border-[#F5A623] bg-[#F5A623]/10 text-[#F5A623]'
+                ? 'border-[#22D3EE] bg-[#22D3EE]/10 text-[#22D3EE]'
                 : 'border-[#26262B] bg-[#17171A] text-[#8A8A93] hover:border-[#38383F] hover:text-[#F2F2F3]'
             }`}
           >
@@ -364,7 +364,7 @@ export default function AdminPanel() {
         <div className="space-y-4">
           {statsLoading ? (
             <div className="flex justify-center py-10">
-              <Loader2 className="h-6 w-6 animate-spin text-[#F5A623]" />
+              <Loader2 className="h-6 w-6 animate-spin text-[#22D3EE]" />
             </div>
           ) : stats ? (
             <>

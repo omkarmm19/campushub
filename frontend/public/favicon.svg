@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
   <rect width="32" height="32" rx="6" fill="#0A0A0B"/>
   <rect x="0.5" y="0.5" width="31" height="31" rx="5.5" stroke="#26262B"/>
-  <!-- Typographic 'C' and amber dot -->
+  <!-- Typographic 'C' and cyan dot -->
   <path d="M18 11.5C16.8 10.5 15.2 10 13.5 10C9.9 10 7 12.7 7 16C7 19.3 9.9 22 13.5 22C15.2 22 16.8 21.5 18 20.5" stroke="#F2F2F3" stroke-width="2.5" stroke-linecap="round"/>
-  <circle cx="21.5" cy="16" r="2.2" fill="#F5A623"/>
+  <circle cx="21.5" cy="16" r="2.2" fill="#22D3EE"/>
 </svg>

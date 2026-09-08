@@ -90,14 +90,14 @@ export default function MarketplaceList() {
             onClick={() => setShowFilters((v) => !v)}
             className={`flex items-center gap-1.5 px-3 py-1.5 border text-xs font-mono rounded-md transition ${
               showFilters || hasActive
-                ? 'border-[#F5A623]/40 bg-[#F5A623]/10 text-[#F5A623]'
+                ? 'border-[#22D3EE]/40 bg-[#22D3EE]/10 text-[#22D3EE]'
                 : 'border-[#26262B] bg-[#111113] text-[#8B8B92] hover:text-[#F2F2F3]'
             }`}
           >
             <SlidersHorizontal className="h-3.5 w-3.5" />
             <span>Filters</span>
             {hasActive && (
-              <span className="px-1.5 py-0.2 bg-[#F5A623] text-[#0A0A0B] text-[10px] font-semibold rounded-sm">
+              <span className="px-1.5 py-0.2 bg-[#22D3EE] text-[#0A0A0B] text-[10px] font-semibold rounded-sm">
                 {Object.values(filters).filter(Boolean).length}
               </span>
             )}
@@ -106,7 +106,7 @@ export default function MarketplaceList() {
           {user && (
             <Link
               to="/marketplace/create"
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#F5A623] hover:bg-[#E0921B] text-[#0A0A0B] font-semibold text-xs rounded-md transition"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#22D3EE] hover:bg-[#0EA5C4] text-[#0A0A0B] font-semibold text-xs rounded-md transition"
             >
               <Plus className="h-3.5 w-3.5" />
               <span>Sell an Item</span>
@@ -141,7 +141,7 @@ export default function MarketplaceList() {
                     onClick={() => set('listing_type', t.value)}
                     className={`flex-1 py-1 px-1.5 rounded-sm text-xs font-medium transition ${
                       filters.listing_type === t.value
-                        ? 'bg-[#F5A623]/10 text-[#F5A623] border border-[#F5A623]/30'
+                        ? 'bg-[#22D3EE]/10 text-[#22D3EE] border border-[#22D3EE]/30'
                         : 'text-[#8B8B92] hover:text-[#F2F2F3] border border-transparent'
                     }`}
                   >
@@ -161,7 +161,7 @@ export default function MarketplaceList() {
                     onClick={() => set('condition', c.value)}
                     className={`flex-1 py-1 px-1.5 rounded-sm text-xs font-medium transition ${
                       filters.condition === c.value
-                        ? 'bg-[#F5A623]/10 text-[#F5A623] border border-[#F5A623]/30'
+                        ? 'bg-[#22D3EE]/10 text-[#22D3EE] border border-[#22D3EE]/30'
                         : 'text-[#8B8B92] hover:text-[#F2F2F3] border border-transparent'
                     }`}
                   >
@@ -177,7 +177,7 @@ export default function MarketplaceList() {
               <select
                 value={filters.category}
                 onChange={(e) => set('category', e.target.value)}
-                className="w-full px-2.5 py-1.5 bg-[#17171A] border border-[#26262B] rounded-md text-xs text-[#F2F2F3] focus:outline-none focus:border-[#F5A623] font-mono capitalize"
+                className="w-full px-2.5 py-1.5 bg-[#17171A] border border-[#26262B] rounded-md text-xs text-[#F2F2F3] focus:outline-none focus:border-[#22D3EE] font-mono capitalize"
               >
                 <option value="">All Categories</option>
                 {CATEGORIES.map((cat) => (
@@ -194,7 +194,7 @@ export default function MarketplaceList() {
                 placeholder="e.g. 1500"
                 value={filters.max_price}
                 onChange={(e) => set('max_price', e.target.value)}
-                className="w-full px-2.5 py-1.5 bg-[#17171A] border border-[#26262B] rounded-md text-xs text-[#F2F2F3] placeholder:text-[#80808A] focus:outline-none focus:border-[#F5A623] font-mono"
+                className="w-full px-2.5 py-1.5 bg-[#17171A] border border-[#26262B] rounded-md text-xs text-[#F2F2F3] placeholder:text-[#80808A] focus:outline-none focus:border-[#22D3EE] font-mono"
               />
             </div>
           </div>
@@ -245,7 +245,7 @@ export default function MarketplaceList() {
           {user && (
             <Link
               to="/marketplace/create"
-              className="mt-4 inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-[#F5A623] hover:bg-[#E0921B] text-[#0A0A0B] text-xs font-semibold rounded-md transition"
+              className="mt-4 inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-[#22D3EE] hover:bg-[#0EA5C4] text-[#0A0A0B] text-xs font-semibold rounded-md transition"
             >
               <Plus className="h-3.5 w-3.5" />
               Sell an Item
@@ -256,9 +256,9 @@ export default function MarketplaceList() {
 
       {/* Guest notice banner */}
       {!user && !loading && items.length > 0 && (
-        <div className="p-3.5 bg-[#17171A] border border-[#F5A623]/30 rounded-md flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="p-3.5 bg-[#17171A] border border-[#22D3EE]/30 rounded-md flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center gap-2.5">
-            <Shield className="h-4 w-4 text-[#F5A623] shrink-0" />
+            <Shield className="h-4 w-4 text-[#22D3EE] shrink-0" />
             <p className="text-xs text-[#8B8B92]">
               Log in with your college email to view WhatsApp contacts, save items, and post listings.
             </p>

@@ -68,7 +68,7 @@ export default function App() {
                   <div className="text-7xl font-mono font-medium text-[#26262B] mb-4">404</div>
                   <h2 className="text-xl font-semibold text-[#F2F2F3] mb-2 tracking-tight">Page not found</h2>
                   <p className="text-[#8B8B92] mb-6 text-sm">The page you're looking for doesn't exist.</p>
-                  <a href="/" className="px-4 py-2 bg-[#F5A623] hover:bg-[#E0921B] text-[#0A0A0B] font-medium text-sm rounded-md transition">← Go Home</a>
+                  <a href="/" className="px-4 py-2 bg-[#22D3EE] hover:bg-[#0EA5C4] text-[#0A0A0B] font-medium text-sm rounded-md transition">← Go Home</a>
                 </div>
               } />
             </Routes>

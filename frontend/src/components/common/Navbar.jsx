@@ -41,7 +41,7 @@ export default function Navbar() {
               className="flex items-center gap-1.5 text-base font-semibold text-[#F2F2F3] tracking-tight hover:opacity-90 transition"
             >
               <span className="font-semibold tracking-tight">CampusHub</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#F5A623] inline-block" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#22D3EE] inline-block" />
             </Link>
 
             {/* Desktop Navigation Links */}
@@ -58,7 +58,7 @@ export default function Navbar() {
                         : 'text-[#8B8B92] hover:text-[#F2F2F3] hover:bg-[#141417]'
                     }`}
                   >
-                    <Icon className={`h-3.5 w-3.5 ${active ? 'text-[#F5A623]' : 'text-[#71717A]'}`} />
+                    <Icon className={`h-3.5 w-3.5 ${active ? 'text-[#22D3EE]' : 'text-[#71717A]'}`} />
                     <span>{label}</span>
                   </Link>
                 );
@@ -88,8 +88,8 @@ export default function Navbar() {
                     title="Admin Panel"
                     className={`p-1.5 rounded-md border transition ${
                       isActive('/admin')
-                        ? 'text-[#F5A623] bg-[#17171A] border-[#F5A623]/30'
-                        : 'text-[#8B8B92] border-transparent hover:text-[#F5A623] hover:bg-[#17171A]'
+                        ? 'text-[#22D3EE] bg-[#17171A] border-[#22D3EE]/30'
+                        : 'text-[#8B8B92] border-transparent hover:text-[#22D3EE] hover:bg-[#17171A]'
                     }`}
                   >
                     <Shield className="h-4 w-4" />
@@ -140,7 +140,7 @@ export default function Navbar() {
                 </Link>
                 <Link
                   to="/register"
-                  className="px-3 py-1.5 text-xs font-medium text-[#0A0A0B] bg-[#F5A623] hover:bg-[#E0921B] rounded-md transition"
+                  className="px-3 py-1.5 text-xs font-medium text-[#0A0A0B] bg-[#22D3EE] hover:bg-[#0EA5C4] rounded-md transition"
                 >
                   Register
                 </Link>
@@ -179,7 +179,7 @@ export default function Navbar() {
                     : 'text-[#8B8B92] hover:text-[#F2F2F3] hover:bg-[#141417]'
                 }`}
               >
-                <Icon className={`h-4 w-4 ${active ? 'text-[#F5A623]' : 'text-[#71717A]'}`} />
+                <Icon className={`h-4 w-4 ${active ? 'text-[#22D3EE]' : 'text-[#71717A]'}`} />
                 <span>{label}</span>
               </Link>
             );
@@ -224,9 +224,9 @@ export default function Navbar() {
                 <Link
                   to="/admin"
                   onClick={() => setMenuOpen(false)}
-                  className="flex items-center gap-2 px-3 py-2 rounded-md text-xs font-medium text-[#F5A623] hover:bg-[#17171A] transition"
+                  className="flex items-center gap-2 px-3 py-2 rounded-md text-xs font-medium text-[#22D3EE] hover:bg-[#17171A] transition"
                 >
-                  <Shield className="h-4 w-4 text-[#F5A623]" />
+                  <Shield className="h-4 w-4 text-[#22D3EE]" />
                   <span>Admin Panel</span>
                 </Link>
               )}
@@ -251,7 +251,7 @@ export default function Navbar() {
               <Link
                 to="/register"
                 onClick={() => setMenuOpen(false)}
-                className="text-center py-2 bg-[#F5A623] hover:bg-[#E0921B] text-xs font-medium text-[#0A0A0B] rounded-md transition"
+                className="text-center py-2 bg-[#22D3EE] hover:bg-[#0EA5C4] text-xs font-medium text-[#0A0A0B] rounded-md transition"
               >
                 Register
               </Link>

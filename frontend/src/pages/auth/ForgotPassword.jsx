@@ -4,7 +4,7 @@ import { authAPI } from '../../api/authAPI';
 import { Mail, KeyRound, AlertCircle, ArrowLeft, Loader2 } from 'lucide-react';
 
 const inputCls =
-  'w-full pl-9 pr-3 py-2 bg-[#111113] border border-[#26262B] rounded-md text-xs text-[#F2F2F3] placeholder:text-[#55555C] focus:outline-none focus:border-[#F5A623] transition-colors font-mono';
+  'w-full pl-9 pr-3 py-2 bg-[#111113] border border-[#26262B] rounded-md text-xs text-[#F2F2F3] placeholder:text-[#55555C] focus:outline-none focus:border-[#22D3EE] transition-colors font-mono';
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState('');
@@ -30,7 +30,7 @@ export default function ForgotPassword() {
   return (
     <div className="max-w-md mx-auto my-12 p-6 sm:p-8 bg-[#111113] rounded-md border border-[#26262B]">
       <div className="text-center mb-6">
-        <div className="mx-auto w-10 h-10 bg-[#17171A] border border-[#26262B] text-[#F5A623] rounded-md flex items-center justify-center mb-3">
+        <div className="mx-auto w-10 h-10 bg-[#17171A] border border-[#26262B] text-[#22D3EE] rounded-md flex items-center justify-center mb-3">
           <KeyRound className="h-5 w-5" />
         </div>
         <h1 className="text-xl font-semibold text-[#F2F2F3] tracking-tight">Forgot Password</h1>
@@ -63,7 +63,7 @@ export default function ForgotPassword() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full flex items-center justify-center gap-2 py-2.5 bg-[#F5A623] hover:bg-[#D98E1C] text-[#0A0A0B] font-medium text-xs rounded-md transition-colors disabled:opacity-50 mt-4"
+          className="w-full flex items-center justify-center gap-2 py-2.5 bg-[#22D3EE] hover:bg-[#0EA5C4] text-[#0A0A0B] font-medium text-xs rounded-md transition-colors disabled:opacity-50 mt-4"
         >
           {loading ? (
             <>

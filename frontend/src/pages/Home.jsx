@@ -73,7 +73,7 @@ export default function Home() {
           {/* Left Column: Asymmetric Typography & Action */}
           <div className="lg:col-span-7 space-y-6">
             <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-sm border border-[#26262B] bg-[#17171A] text-[11px] font-mono text-[#8B8B92]">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#F5A623]" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#22D3EE]" />
               <span>CAMPUS INFRASTRUCTURE SYSTEM</span>
             </div>
 
@@ -91,7 +91,7 @@ export default function Home() {
                 <>
                   <Link
                     to="/register"
-                    className="inline-flex items-center gap-2 px-4 py-2 bg-[#F5A623] hover:bg-[#E0921B] text-[#0A0A0B] text-xs font-semibold rounded-md transition duration-150"
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-[#22D3EE] hover:bg-[#0EA5C4] text-[#0A0A0B] text-xs font-semibold rounded-md transition duration-150"
                   >
                     <span>Join with College Email</span>
                     <ArrowRight className="h-3.5 w-3.5" />
@@ -108,7 +108,7 @@ export default function Home() {
                 <>
                   <Link
                     to="/housing"
-                    className="inline-flex items-center gap-2 px-4 py-2 bg-[#F5A623] hover:bg-[#E0921B] text-[#0A0A0B] text-xs font-semibold rounded-md transition duration-150"
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-[#22D3EE] hover:bg-[#0EA5C4] text-[#0A0A0B] text-xs font-semibold rounded-md transition duration-150"
                   >
                     <span>Explore Feed</span>
                     <ArrowRight className="h-3.5 w-3.5" />
@@ -290,7 +290,7 @@ export default function Home() {
                 {/* Header with single-tone icon + arrow */}
                 <div className="flex items-center justify-between mb-4">
                   <Icon className="h-5 w-5 text-[#8B8B92] group-hover:text-[#F2F2F3] transition" />
-                  <ArrowUpRight className="h-3.5 w-3.5 text-[#52525A] group-hover:text-[#F5A623] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition duration-150" />
+                  <ArrowUpRight className="h-3.5 w-3.5 text-[#52525A] group-hover:text-[#22D3EE] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition duration-150" />
                 </div>
 
                 <h3 className="text-sm font-semibold text-[#F2F2F3] tracking-tight group-hover:text-white transition">
@@ -303,7 +303,7 @@ export default function Home() {
 
               <div className="mt-4 pt-3 border-t border-[#1F1F24] flex items-center justify-between text-[11px] font-mono text-[#71717A]">
                 <span>{stat}</span>
-                <span className="text-[#8B8B92] group-hover:text-[#F5A623] transition">
+                <span className="text-[#8B8B92] group-hover:text-[#22D3EE] transition">
                   Browse →
                 </span>
               </div>
@@ -317,7 +317,7 @@ export default function Home() {
         <section className="border border-[#26262B] bg-[#111113] rounded-md p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="p-2 rounded-sm border border-[#26262B] bg-[#17171A] text-[#8B8B92]">
-              <Shield className="h-4 w-4 text-[#F5A623]" />
+              <Shield className="h-4 w-4 text-[#22D3EE]" />
             </div>
             <div>
               <div className="text-xs font-medium text-[#F2F2F3]">

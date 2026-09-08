@@ -4,7 +4,7 @@ import { authAPI } from '../../api/authAPI';
 import { KeyRound, Lock, AlertCircle, ShieldCheck, Loader2 } from 'lucide-react';
 
 const inputCls =
-  'w-full px-3 py-2 bg-[#111113] border border-[#26262B] rounded-md text-xs text-[#F2F2F3] placeholder:text-[#55555C] focus:outline-none focus:border-[#F5A623] transition-colors font-mono';
+  'w-full px-3 py-2 bg-[#111113] border border-[#26262B] rounded-md text-xs text-[#F2F2F3] placeholder:text-[#55555C] focus:outline-none focus:border-[#22D3EE] transition-colors font-mono';
 
 export default function ResetPassword() {
   const location = useLocation();
@@ -94,7 +94,7 @@ export default function ResetPassword() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full flex items-center justify-center gap-2 py-2.5 bg-[#F5A623] hover:bg-[#D98E1C] text-[#0A0A0B] font-medium text-xs rounded-md transition-colors disabled:opacity-50 mt-4"
+          className="w-full flex items-center justify-center gap-2 py-2.5 bg-[#22D3EE] hover:bg-[#0EA5C4] text-[#0A0A0B] font-medium text-xs rounded-md transition-colors disabled:opacity-50 mt-4"
         >
           {loading ? (
             <>

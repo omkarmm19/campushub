@@ -76,7 +76,7 @@ export default function HousingCard({ listing }) {
       <div className="flex flex-col flex-1 p-3.5 gap-2.5">
         {/* Rent & Per person */}
         <div className="flex items-baseline gap-1">
-          <IndianRupee className="h-3.5 w-3.5 text-[#F5A623] shrink-0 mt-0.5" />
+          <IndianRupee className="h-3.5 w-3.5 text-[#22D3EE] shrink-0 mt-0.5" />
           <span className="text-lg font-mono font-semibold text-[#F2F2F3]">
             {listing.rent_per_person.toLocaleString('en-IN')}
           </span>

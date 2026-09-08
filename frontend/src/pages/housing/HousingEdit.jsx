@@ -10,7 +10,7 @@ import { useAuth } from '../../context/AuthContext';
 const AMENITY_OPTIONS = ['WiFi', 'Electricity', 'Water', 'Parking', 'Mess', 'AC', 'Laundry', 'Security'];
 const SHARING_OPTIONS = ['single', 'double', 'triple', 'other'];
 
-const inputCls = 'w-full px-3 py-2 bg-[#17171A] border border-[#26262B] rounded-md text-xs text-[#F2F2F3] focus:outline-none focus:border-[#F5A623] placeholder:text-[#71717A] font-mono';
+const inputCls = 'w-full px-3 py-2 bg-[#17171A] border border-[#26262B] rounded-md text-xs text-[#F2F2F3] focus:outline-none focus:border-[#22D3EE] placeholder:text-[#71717A] font-mono';
 
 function Field({ label, children, hint }) {
   return (
@@ -106,7 +106,7 @@ export default function HousingEdit() {
   if (loading) {
     return (
       <div className="max-w-2xl mx-auto py-16 flex justify-center">
-        <Loader2 className="h-6 w-6 animate-spin text-[#F5A623]" />
+        <Loader2 className="h-6 w-6 animate-spin text-[#22D3EE]" />
       </div>
     );
   }
@@ -187,7 +187,7 @@ export default function HousingEdit() {
                 onClick={() => set('sharing_type', s)}
                 className={`flex-1 py-1.5 rounded-sm border text-xs font-mono capitalize transition ${
                   form.sharing_type === s
-                    ? 'border-[#F5A623] bg-[#F5A623]/10 text-[#F5A623]'
+                    ? 'border-[#22D3EE] bg-[#22D3EE]/10 text-[#22D3EE]'
                     : 'border-[#26262B] bg-[#17171A] text-[#8B8B92] hover:border-[#3A3A42]'
                 }`}
               >
@@ -235,11 +235,11 @@ export default function HousingEdit() {
                   onClick={() => toggleAmenity(a)}
                   className={`px-2.5 py-1 rounded-sm text-xs font-mono border transition ${
                     active
-                      ? 'border-[#F5A623]/30 bg-[#F5A623]/10 text-[#F5A623]'
+                      ? 'border-[#22D3EE]/30 bg-[#22D3EE]/10 text-[#22D3EE]'
                       : 'border-[#26262B] bg-[#17171A] text-[#8B8B92] hover:text-[#F2F2F3]'
                   }`}
                 >
-                  {active && <span className="mr-1 text-[#F5A623]">✓</span>}
+                  {active && <span className="mr-1 text-[#22D3EE]">✓</span>}
                   {a}
                 </button>
               );
@@ -290,7 +290,7 @@ export default function HousingEdit() {
           <button
             type="submit"
             disabled={submitting}
-            className="flex-1 flex items-center justify-center gap-2 py-2 bg-[#F5A623] hover:bg-[#E0921B] text-[#0A0A0B] font-semibold text-xs rounded-md transition disabled:opacity-60"
+            className="flex-1 flex items-center justify-center gap-2 py-2 bg-[#22D3EE] hover:bg-[#0EA5C4] text-[#0A0A0B] font-semibold text-xs rounded-md transition disabled:opacity-60"
           >
             {submitting
               ? <><Loader2 className="h-3.5 w-3.5 animate-spin" /> Saving...</>

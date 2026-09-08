@@ -28,7 +28,7 @@ function StatCard({ label, value, icon: Icon, path }) {
         <p className="text-xs text-[#8A8A93] font-medium">{label}</p>
       </div>
       <div className="flex items-center gap-2">
-        <Icon className="h-5 w-5 text-[#8A8A93] group-hover:text-[#F5A623] transition-colors" />
+        <Icon className="h-5 w-5 text-[#8A8A93] group-hover:text-[#22D3EE] transition-colors" />
         <ChevronRight className="h-4 w-4 text-[#55555C] group-hover:text-[#F2F2F3] transition-colors" />
       </div>
     </Link>
@@ -55,11 +55,11 @@ function PostPreviewCard({ item, type }) {
       className="group flex items-center justify-between p-2.5 rounded-md hover:bg-[#17171A] border border-transparent hover:border-[#26262B] transition-colors"
     >
       <div className="flex items-center gap-3 min-w-0">
-        <div className="p-1.5 rounded-sm bg-[#17171A] border border-[#26262B] text-[#8A8A93] group-hover:text-[#F5A623] shrink-0 transition-colors">
+        <div className="p-1.5 rounded-sm bg-[#17171A] border border-[#26262B] text-[#8A8A93] group-hover:text-[#22D3EE] shrink-0 transition-colors">
           <Icon className="h-4 w-4" />
         </div>
         <div className="min-w-0">
-          <p className="text-xs font-medium text-[#F2F2F3] group-hover:text-[#F5A623] transition-colors truncate">
+          <p className="text-xs font-medium text-[#F2F2F3] group-hover:text-[#22D3EE] transition-colors truncate">
             {title}
           </p>
           <p className="text-[11px] font-mono text-[#8A8A93] capitalize mt-0.5 truncate">
@@ -166,7 +166,7 @@ export default function Dashboard() {
           </Link>
           <Link
             to="/housing/create"
-            className="px-3 py-1.5 bg-[#F5A623] hover:bg-[#D48B17] text-xs font-medium text-[#0A0A0B] rounded-md transition-colors"
+            className="px-3 py-1.5 bg-[#22D3EE] hover:bg-[#0EA5C4] text-xs font-medium text-[#0A0A0B] rounded-md transition-colors"
           >
             Post Listing
           </Link>
@@ -176,7 +176,7 @@ export default function Dashboard() {
       {/* Stats */}
       {loading ? (
         <div className="flex justify-center py-10">
-          <Loader2 className="h-6 w-6 animate-spin text-[#F5A623]" />
+          <Loader2 className="h-6 w-6 animate-spin text-[#22D3EE]" />
         </div>
       ) : error ? (
         <div className="p-4 bg-[#17171A] border border-[#F87171]/30 rounded-md text-center">
@@ -253,9 +253,9 @@ export default function Dashboard() {
                       to={path}
                       className="group flex items-start gap-2.5 p-3 rounded-md border border-[#26262B] hover:border-[#38383F] bg-[#17171A] hover:bg-[#1E1E22] transition-colors"
                     >
-                      <Icon className="h-4 w-4 text-[#8A8A93] group-hover:text-[#F5A623] shrink-0 mt-0.5 transition-colors" />
+                      <Icon className="h-4 w-4 text-[#8A8A93] group-hover:text-[#22D3EE] shrink-0 mt-0.5 transition-colors" />
                       <div>
-                        <p className="text-xs font-medium text-[#F2F2F3] group-hover:text-[#F5A623] transition-colors">
+                        <p className="text-xs font-medium text-[#F2F2F3] group-hover:text-[#22D3EE] transition-colors">
                           {label}
                         </p>
                         <p className="text-[11px] text-[#8A8A93]">{sub}</p>

@@ -48,7 +48,7 @@ export default function SaveButton({ module, postId, className = '' }) {
       disabled={loading}
       className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm border text-xs font-mono transition duration-150 ${
         saved
-          ? 'bg-[#F5A623]/10 border-[#F5A623]/30 text-[#F5A623]'
+          ? 'bg-[#22D3EE]/10 border-[#22D3EE]/30 text-[#22D3EE]'
           : 'bg-[#17171A] border-[#26262B] text-[#8B8B92] hover:text-[#F2F2F3] hover:border-[#3A3A42]'
       } ${className}`}
       title={saved ? 'Remove bookmark' : 'Bookmark this post'}
@@ -56,7 +56,7 @@ export default function SaveButton({ module, postId, className = '' }) {
       {loading ? (
         <Loader2 className="h-3 w-3 animate-spin" />
       ) : (
-        <Bookmark className={`h-3 w-3 ${saved ? 'fill-[#F5A623] text-[#F5A623]' : ''}`} />
+        <Bookmark className={`h-3 w-3 ${saved ? 'fill-[#22D3EE] text-[#22D3EE]' : ''}`} />
       )}
       <span>{saved ? 'Saved' : 'Save'}</span>
     </button>

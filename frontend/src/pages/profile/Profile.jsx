@@ -4,7 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import { User, Phone, Building, Home, Check, AlertCircle, Loader2, ShieldCheck } from 'lucide-react';
 
 const inputCls =
-  'w-full pl-9 pr-3 py-2 bg-[#111113] border border-[#26262B] rounded-md text-xs text-[#F2F2F3] placeholder:text-[#55555C] focus:outline-none focus:border-[#F5A623] transition-colors font-mono';
+  'w-full pl-9 pr-3 py-2 bg-[#111113] border border-[#26262B] rounded-md text-xs text-[#F2F2F3] placeholder:text-[#55555C] focus:outline-none focus:border-[#22D3EE] transition-colors font-mono';
 
 export default function Profile() {
   const { user, updateProfile } = useAuth();
@@ -45,7 +45,7 @@ export default function Profile() {
     <div className="max-w-xl mx-auto py-6">
       {/* Page Header */}
       <div className="mb-5 flex items-center gap-2.5 pb-2 border-b border-[#26262B]">
-        <User className="h-5 w-5 text-[#F5A623] shrink-0" />
+        <User className="h-5 w-5 text-[#22D3EE] shrink-0" />
         <div>
           <h1 className="text-xl font-semibold text-[#F2F2F3] tracking-tight">Profile Settings</h1>
           <p className="text-xs text-[#8A8A93]">Update your student account details</p>
@@ -157,7 +157,7 @@ export default function Profile() {
           <button
             type="submit"
             disabled={submitting}
-            className="flex-1 flex items-center justify-center gap-1.5 py-2 bg-[#F5A623] hover:bg-[#D98E1C] text-[#0A0A0B] font-medium text-xs rounded-md transition-colors disabled:opacity-50"
+            className="flex-1 flex items-center justify-center gap-1.5 py-2 bg-[#22D3EE] hover:bg-[#0EA5C4] text-[#0A0A0B] font-medium text-xs rounded-md transition-colors disabled:opacity-50"
           >
             {submitting ? (
               <>

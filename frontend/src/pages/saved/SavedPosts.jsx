@@ -75,11 +75,11 @@ function SavedCard({ saved, detail, onUnsave }) {
   return (
     <div className="group bg-[#111113] rounded-md border border-[#26262B] hover:border-[#38383F] transition-colors flex items-center gap-3 p-3.5">
       <Link to={`${path}/${saved.post_id}`} className="flex items-center gap-3 flex-1 min-w-0">
-        <div className="p-2 rounded-sm bg-[#17171A] border border-[#26262B] text-[#8A8A93] group-hover:text-[#F5A623] shrink-0 transition-colors">
+        <div className="p-2 rounded-sm bg-[#17171A] border border-[#26262B] text-[#8A8A93] group-hover:text-[#22D3EE] shrink-0 transition-colors">
           <Icon className="h-4 w-4" />
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-xs font-medium text-[#F2F2F3] group-hover:text-[#F5A623] transition-colors truncate">
+          <p className="text-xs font-medium text-[#F2F2F3] group-hover:text-[#22D3EE] transition-colors truncate">
             {title}
           </p>
           <div className="flex items-center gap-2 mt-0.5 font-mono text-[11px] text-[#8A8A93]">
@@ -184,7 +184,7 @@ export default function SavedPosts() {
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-[#26262B]">
           <div className="flex items-center gap-2.5">
-            <Bookmark className="h-5 w-5 text-[#F5A623] shrink-0" />
+            <Bookmark className="h-5 w-5 text-[#22D3EE] shrink-0" />
             <div>
               <h1 className="text-xl font-semibold text-[#F2F2F3] tracking-tight">Saved Posts</h1>
               <p className="text-xs text-[#8A8A93]">Your bookmarked listings across campus</p>
@@ -204,7 +204,7 @@ export default function SavedPosts() {
             onClick={() => setActiveFilter('')}
             className={`px-3 py-1.5 rounded-sm text-xs font-medium border transition-colors ${
               !activeFilter
-                ? 'border-[#F5A623] bg-[#F5A623]/10 text-[#F5A623]'
+                ? 'border-[#22D3EE] bg-[#22D3EE]/10 text-[#22D3EE]'
                 : 'border-[#26262B] bg-[#17171A] text-[#8A8A93] hover:border-[#38383F] hover:text-[#F2F2F3]'
             }`}
           >
@@ -216,7 +216,7 @@ export default function SavedPosts() {
               onClick={() => setActiveFilter(activeFilter === key ? '' : key)}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-sm text-xs font-medium border transition-colors ${
                 activeFilter === key
-                  ? 'border-[#F5A623] bg-[#F5A623]/10 text-[#F5A623]'
+                  ? 'border-[#22D3EE] bg-[#22D3EE]/10 text-[#22D3EE]'
                   : 'border-[#26262B] bg-[#17171A] text-[#8A8A93] hover:border-[#38383F] hover:text-[#F2F2F3]'
               }`}
             >

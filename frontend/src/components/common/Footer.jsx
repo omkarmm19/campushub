@@ -8,7 +8,7 @@ export default function Footer() {
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-1.5 text-sm font-semibold text-[#F2F2F3] tracking-tight">
               <span>CampusHub</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#F5A623] inline-block" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#22D3EE] inline-block" />
             </div>
             <span className="text-[#26262B]">/</span>
             <p className="text-[#8B8B92]">

@@ -4,7 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import { Mail, Lock, Eye, EyeOff, AlertCircle, CheckCircle2, Loader2 } from 'lucide-react';
 
 const inputCls =
-  'w-full pl-9 pr-10 py-2 bg-[#111113] border border-[#26262B] rounded-md text-xs text-[#F2F2F3] placeholder:text-[#55555C] focus:outline-none focus:border-[#F5A623] transition-colors font-mono';
+  'w-full pl-9 pr-10 py-2 bg-[#111113] border border-[#26262B] rounded-md text-xs text-[#F2F2F3] placeholder:text-[#55555C] focus:outline-none focus:border-[#22D3EE] transition-colors font-mono';
 
 export default function Login() {
   const { login } = useAuth();
@@ -74,7 +74,7 @@ export default function Login() {
         <div className="flex flex-col gap-1.5">
           <div className="flex justify-between items-center">
             <label className="text-[11px] font-mono uppercase tracking-wider text-[#8A8A93]">Password</label>
-            <Link to="/forgot-password" className="text-[11px] font-mono text-[#8A8A93] hover:text-[#F5A623] transition-colors">
+            <Link to="/forgot-password" className="text-[11px] font-mono text-[#8A8A93] hover:text-[#22D3EE] transition-colors">
               Forgot password?
             </Link>
           </div>
@@ -103,7 +103,7 @@ export default function Login() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full flex items-center justify-center gap-2 py-2.5 bg-[#F5A623] hover:bg-[#D98E1C] text-[#0A0A0B] font-medium text-xs rounded-md transition-colors disabled:opacity-50 mt-4"
+          className="w-full flex items-center justify-center gap-2 py-2.5 bg-[#22D3EE] hover:bg-[#0EA5C4] text-[#0A0A0B] font-medium text-xs rounded-md transition-colors disabled:opacity-50 mt-4"
         >
           {loading ? (
             <>
@@ -117,7 +117,7 @@ export default function Login() {
 
       <p className="text-center text-xs text-[#8A8A93] mt-6">
         Don&apos;t have an account?{' '}
-        <Link to="/register" className="text-[#F5A623] font-medium hover:underline">
+        <Link to="/register" className="text-[#22D3EE] font-medium hover:underline">
           Register now
         </Link>
       </p>

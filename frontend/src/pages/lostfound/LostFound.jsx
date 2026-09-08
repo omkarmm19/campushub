@@ -93,7 +93,7 @@ export function LostFoundList() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-[#26262B]">
         <div>
           <div className="flex items-center gap-2.5 mb-1">
-            <Search className="h-5 w-5 text-[#F5A623] shrink-0" />
+            <Search className="h-5 w-5 text-[#22D3EE] shrink-0" />
             <h1 className="text-2xl font-semibold text-[#F2F2F3] tracking-tight">Lost &amp; Found</h1>
           </div>
           <p className="text-xs text-[#8A8A93]">Report or find lost items on campus</p>
@@ -101,7 +101,7 @@ export function LostFoundList() {
         {user && (
           <Link
             to="/lost-found/create"
-            className="inline-flex items-center gap-2 px-4 py-2 bg-[#F5A623] hover:bg-[#D48B17] text-[#0A0A0B] font-medium text-xs rounded-md transition-colors shadow-none"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-[#22D3EE] hover:bg-[#0EA5C4] text-[#0A0A0B] font-medium text-xs rounded-md transition-colors shadow-none"
           >
             <Plus className="h-4 w-4" /> Post a Report
           </Link>
@@ -114,7 +114,7 @@ export function LostFoundList() {
           onClick={() => setFilter('')}
           className={`px-3 py-1.5 rounded-sm text-xs font-medium border transition-colors ${
             !filter
-              ? 'border-[#F5A623] bg-[#F5A623]/10 text-[#F5A623]'
+              ? 'border-[#22D3EE] bg-[#22D3EE]/10 text-[#22D3EE]'
               : 'border-[#26262B] bg-[#17171A] text-[#8A8A93] hover:border-[#38383F] hover:text-[#F2F2F3]'
           }`}
         >
@@ -196,7 +196,7 @@ export function LostFoundList() {
                 </div>
 
                 <div>
-                  <h3 className="font-semibold text-[#F2F2F3] group-hover:text-[#F5A623] transition-colors line-clamp-1 text-sm">
+                  <h3 className="font-semibold text-[#F2F2F3] group-hover:text-[#22D3EE] transition-colors line-clamp-1 text-sm">
                     {post.title}
                   </h3>
                   <p className="text-xs text-[#8A8A93] line-clamp-2 leading-relaxed mt-1">
@@ -243,7 +243,7 @@ export function LostFoundList() {
           {user && (
             <Link
               to="/lost-found/create"
-              className="mt-4 inline-flex items-center gap-1.5 px-4 py-2 bg-[#F5A623] hover:bg-[#D48B17] text-[#0A0A0B] font-medium text-xs rounded-md transition-colors"
+              className="mt-4 inline-flex items-center gap-1.5 px-4 py-2 bg-[#22D3EE] hover:bg-[#0EA5C4] text-[#0A0A0B] font-medium text-xs rounded-md transition-colors"
             >
               <Plus className="h-3.5 w-3.5" /> Post a Report
             </Link>
@@ -252,9 +252,9 @@ export function LostFoundList() {
       )}
 
       {!user && !loading && posts.length > 0 && (
-        <div className="p-3.5 bg-[#17171A] border border-[#F5A623]/30 rounded-md flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="p-3.5 bg-[#17171A] border border-[#22D3EE]/30 rounded-md flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center gap-2.5">
-            <Shield className="h-4 w-4 text-[#F5A623] shrink-0" />
+            <Shield className="h-4 w-4 text-[#22D3EE] shrink-0" />
             <p className="text-xs text-[#8B8B92]">
               Log in with your college email to view reporter contact details and submit reports.
             </p>
@@ -355,7 +355,7 @@ export function LostFoundDetail() {
   if (loading) {
     return (
       <div className="max-w-2xl mx-auto py-16 flex justify-center">
-        <Loader2 className="h-6 w-6 animate-spin text-[#F5A623]" />
+        <Loader2 className="h-6 w-6 animate-spin text-[#22D3EE]" />
       </div>
     );
   }
@@ -364,7 +364,7 @@ export function LostFoundDetail() {
     return (
       <div className="max-w-2xl mx-auto py-16 text-center">
         <p className="text-xs text-[#8A8A93] mb-3">{error}</p>
-        <Link to="/lost-found" className="text-xs text-[#F5A623] hover:underline font-medium">
+        <Link to="/lost-found" className="text-xs text-[#22D3EE] hover:underline font-medium">
           ← Back to Lost &amp; Found
         </Link>
       </div>
@@ -512,7 +512,7 @@ export function LostFoundDetail() {
 
 // ─── CREATE PAGE ───────────────────────────────────────────────────
 const inputCls =
-  'w-full px-3 py-2 bg-[#111113] border border-[#26262B] focus:border-[#F5A623] rounded-md text-xs text-[#F2F2F3] placeholder-[#55555C] focus:outline-none transition-colors';
+  'w-full px-3 py-2 bg-[#111113] border border-[#26262B] focus:border-[#22D3EE] rounded-md text-xs text-[#F2F2F3] placeholder-[#55555C] focus:outline-none transition-colors';
 
 export function LostFoundCreate() {
   const navigate = useNavigate();
@@ -563,7 +563,7 @@ export function LostFoundCreate() {
   return (
     <div className="max-w-xl mx-auto py-6">
       <div className="mb-5 flex items-center gap-2.5 pb-2 border-b border-[#26262B]">
-        <Search className="h-5 w-5 text-[#F5A623] shrink-0" />
+        <Search className="h-5 w-5 text-[#22D3EE] shrink-0" />
         <div>
           <h1 className="text-xl font-semibold text-[#F2F2F3] tracking-tight">Post a Lost &amp; Found Report</h1>
           <p className="text-xs text-[#8A8A93]">Help the campus community locate lost items</p>
@@ -679,7 +679,7 @@ export function LostFoundCreate() {
             type="button"
             onClick={() => fileInputRef.current?.click()}
             disabled={imageFiles.length >= 5}
-            className="w-full border border-dashed border-[#26262B] hover:border-[#F5A623]/50 bg-[#17171A] rounded-md p-4 flex items-center justify-center gap-2 text-[#8A8A93] hover:text-[#F2F2F3] transition-colors disabled:opacity-40"
+            className="w-full border border-dashed border-[#26262B] hover:border-[#22D3EE]/50 bg-[#17171A] rounded-md p-4 flex items-center justify-center gap-2 text-[#8A8A93] hover:text-[#F2F2F3] transition-colors disabled:opacity-40"
           >
             <Upload className="h-4 w-4" />
             <span className="text-xs font-medium">Click to upload photos</span>
@@ -724,7 +724,7 @@ export function LostFoundCreate() {
           <button
             type="submit"
             disabled={submitting}
-            className="flex-1 flex items-center justify-center gap-1.5 py-2.5 bg-[#F5A623] hover:bg-[#D48B17] text-[#0A0A0B] rounded-md font-medium text-xs transition-colors disabled:opacity-60"
+            className="flex-1 flex items-center justify-center gap-1.5 py-2.5 bg-[#22D3EE] hover:bg-[#0EA5C4] text-[#0A0A0B] rounded-md font-medium text-xs transition-colors disabled:opacity-60"
           >
             {submitting ? (
               <>
@@ -799,7 +799,7 @@ export function LostFoundEdit() {
   if (loading) {
     return (
       <div className="max-w-xl mx-auto py-16 flex justify-center">
-        <Loader2 className="h-6 w-6 animate-spin text-[#F5A623]" />
+        <Loader2 className="h-6 w-6 animate-spin text-[#22D3EE]" />
       </div>
     );
   }
@@ -815,7 +815,7 @@ export function LostFoundEdit() {
   return (
     <div className="max-w-xl mx-auto py-6">
       <div className="mb-5 flex items-center gap-2.5 pb-2 border-b border-[#26262B]">
-        <Search className="h-5 w-5 text-[#F5A623] shrink-0" />
+        <Search className="h-5 w-5 text-[#22D3EE] shrink-0" />
         <div>
           <h1 className="text-xl font-semibold text-[#F2F2F3] tracking-tight">Edit Report</h1>
           <p className="text-xs text-[#8A8A93]">Update your lost &amp; found report</p>
@@ -947,7 +947,7 @@ export function LostFoundEdit() {
           <button
             type="submit"
             disabled={submitting}
-            className="flex-1 flex items-center justify-center gap-1.5 py-2.5 bg-[#F5A623] hover:bg-[#D48B17] text-[#0A0A0B] rounded-md font-medium text-xs transition-colors disabled:opacity-60"
+            className="flex-1 flex items-center justify-center gap-1.5 py-2.5 bg-[#22D3EE] hover:bg-[#0EA5C4] text-[#0A0A0B] rounded-md font-medium text-xs transition-colors disabled:opacity-60"
           >
             {submitting ? (
               <>

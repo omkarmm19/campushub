@@ -4,7 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import { User, Mail, Phone, Lock, Building, Home, CreditCard, AlertCircle, Loader2 } from 'lucide-react';
 
 const inputCls =
-  'w-full pl-9 pr-3 py-2 bg-[#111113] border border-[#26262B] rounded-md text-xs text-[#F2F2F3] placeholder:text-[#55555C] focus:outline-none focus:border-[#F5A623] transition-colors font-mono';
+  'w-full pl-9 pr-3 py-2 bg-[#111113] border border-[#26262B] rounded-md text-xs text-[#F2F2F3] placeholder:text-[#55555C] focus:outline-none focus:border-[#22D3EE] transition-colors font-mono';
 
 export default function Register() {
   const { register } = useAuth();
@@ -177,7 +177,7 @@ export default function Register() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full flex items-center justify-center gap-2 py-2.5 bg-[#F5A623] hover:bg-[#D98E1C] text-[#0A0A0B] font-medium text-xs rounded-md transition-colors disabled:opacity-50 mt-4"
+          className="w-full flex items-center justify-center gap-2 py-2.5 bg-[#22D3EE] hover:bg-[#0EA5C4] text-[#0A0A0B] font-medium text-xs rounded-md transition-colors disabled:opacity-50 mt-4"
         >
           {loading ? (
             <>
@@ -191,7 +191,7 @@ export default function Register() {
 
       <p className="text-center text-xs text-[#8A8A93] mt-6">
         Already registered?{' '}
-        <Link to="/login" className="text-[#F5A623] font-medium hover:underline">
+        <Link to="/login" className="text-[#22D3EE] font-medium hover:underline">
           Log in here
         </Link>
       </p>

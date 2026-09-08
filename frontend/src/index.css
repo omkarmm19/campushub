@@ -13,8 +13,8 @@
   --color-text-primary: #F2F2F3;
   --color-text-secondary: #8B8B92;
   --color-text-muted: #80808A;
-  --color-accent: #F5A623;
-  --color-accent-hover: #E0921B;
+  --color-accent: #22D3EE;
+  --color-accent-hover: #0EA5C4;
   --color-accent-text: #0A0A0B;
 }
 
@@ -29,10 +29,10 @@
   --text-primary: #F2F2F3;
   --text-secondary: #8B8B92;
   --text-muted: #80808A;
-  --accent: #F5A623;
-  --accent-hover: #E0921B;
+  --accent: #22D3EE;
+  --accent-hover: #0EA5C4;
   --accent-text: #0A0A0B;
-  --accent-faint: rgba(245, 166, 35, 0.08);
+  --accent-faint: rgba(34, 211, 238, 0.08);
 
   /* Status Tokens */
   --status-active-text: #34D399;
@@ -73,7 +73,7 @@
     color: #F2F2F3;
   }
 
-  /* Universal amber focus ring to prevent browser-default blue outlines */
+  /* Universal cyan focus ring to prevent browser-default blue outlines */
   input:focus, textarea:focus, select:focus,
   input:focus-visible, textarea:focus-visible, select:focus-visible {
     outline: none;

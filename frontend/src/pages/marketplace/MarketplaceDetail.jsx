@@ -38,7 +38,7 @@ function ImageCarousel({ images }) {
           </button>
           <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
             {sorted.map((_, i) => (
-              <button key={i} onClick={() => setCurrent(i)} className={`h-1 rounded-sm transition-all ${i === current ? 'w-5 bg-[#F5A623]' : 'w-2 bg-[#80808A]'}`} />
+              <button key={i} onClick={() => setCurrent(i)} className={`h-1 rounded-sm transition-all ${i === current ? 'w-5 bg-[#22D3EE]' : 'w-2 bg-[#80808A]'}`} />
             ))}
           </div>
         </>
@@ -118,7 +118,7 @@ export default function MarketplaceDetail() {
   if (error) return (
     <div className="max-w-2xl mx-auto py-20 text-center border border-[#26262B] bg-[#111113] rounded-md p-8">
       <p className="text-xs text-red-400 font-medium mb-3">{error}</p>
-      <Link to="/marketplace" className="text-xs text-[#F5A623] hover:underline font-mono">
+      <Link to="/marketplace" className="text-xs text-[#22D3EE] hover:underline font-mono">
         ← Back to marketplace
       </Link>
     </div>
@@ -177,7 +177,7 @@ export default function MarketplaceDetail() {
               <span className="text-2xl font-mono font-semibold text-[#34D399]">Free</span>
             ) : (
               <div className="flex items-baseline gap-1">
-                <IndianRupee className="h-5 w-5 text-[#F5A623]" />
+                <IndianRupee className="h-5 w-5 text-[#22D3EE]" />
                 <span className="text-2xl sm:text-3xl font-mono font-semibold text-[#F2F2F3]">
                   {item.price.toLocaleString('en-IN')}
                 </span>
@@ -225,7 +225,7 @@ export default function MarketplaceDetail() {
                 <span>WhatsApp</span>
               </a>
             ) : (
-              <Link to="/login" className="flex items-center gap-1.5 px-3.5 py-2 bg-[#F5A623] hover:bg-[#E0921B] text-[#0A0A0B] font-semibold text-xs rounded-md transition">
+              <Link to="/login" className="flex items-center gap-1.5 px-3.5 py-2 bg-[#22D3EE] hover:bg-[#0EA5C4] text-[#0A0A0B] font-semibold text-xs rounded-md transition">
                 <span>Login to contact</span>
               </Link>
             )}

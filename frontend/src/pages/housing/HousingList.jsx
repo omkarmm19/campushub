@@ -80,7 +80,7 @@ export default function HousingList() {
         {user && (
           <Link
             to="/housing/create"
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#F5A623] hover:bg-[#E0921B] text-[#0A0A0B] font-semibold text-xs rounded-md transition duration-150 shrink-0"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#22D3EE] hover:bg-[#0EA5C4] text-[#0A0A0B] font-semibold text-xs rounded-md transition duration-150 shrink-0"
           >
             <Plus className="h-3.5 w-3.5" />
             <span>Post a Listing</span>
@@ -139,7 +139,7 @@ export default function HousingList() {
           {user && (
             <Link
               to="/housing/create"
-              className="mt-4 inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-[#F5A623] hover:bg-[#E0921B] text-[#0A0A0B] text-xs font-semibold rounded-md transition"
+              className="mt-4 inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-[#22D3EE] hover:bg-[#0EA5C4] text-[#0A0A0B] text-xs font-semibold rounded-md transition"
             >
               <Plus className="h-3.5 w-3.5" />
               Post a Listing
@@ -150,9 +150,9 @@ export default function HousingList() {
 
       {/* Guest notice banner — BUG 2 fix: dark banner with hairline secondary button */}
       {!user && !loading && listings.length > 0 && (
-        <div className="p-3.5 bg-[#17171A] border border-[#F5A623]/30 rounded-md flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="p-3.5 bg-[#17171A] border border-[#22D3EE]/30 rounded-md flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center gap-2.5">
-            <Shield className="h-4 w-4 text-[#F5A623] shrink-0" />
+            <Shield className="h-4 w-4 text-[#22D3EE] shrink-0" />
             <p className="text-xs text-[#8B8B92]">
               Log in with your college email to view WhatsApp contact numbers and post rooms.
             </p>

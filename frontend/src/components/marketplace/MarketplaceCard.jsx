@@ -85,7 +85,7 @@ export default function MarketplaceCard({ item }) {
             <span className="text-[#34D399] font-mono font-semibold text-base">Free</span>
           ) : (
             <div className="flex items-baseline gap-0.5">
-              <IndianRupee className="h-3.5 w-3.5 text-[#F5A623] mb-0.5" />
+              <IndianRupee className="h-3.5 w-3.5 text-[#22D3EE] mb-0.5" />
               <span className="text-lg font-mono font-semibold text-[#F2F2F3]">
                 {item.price.toLocaleString('en-IN')}
               </span>
